@@ -1,0 +1,2 @@
+2017-04-29T22:10:36.390+0700 I CONTROL  [main] Trying to install Windows service 'MongoDB'
+2017-04-29T22:10:36.391+0700 I CONTROL  [main] There is already a service named 'MongoDB', sleeping and retrying

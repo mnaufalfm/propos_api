@@ -1,0 +1,99 @@
+package user
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"strings"
+
+	"crypto/sha256"
+
+	"strconv"
+
+	"gopkg.in/mgo.v2"
+)
+
+type Rekening struct {
+	NoRekening string `json:"norekening"`
+	AtasNama   string `json:"atasnama"`
+	Bank       string `json:"bank"`
+}
+
+type Pengguna struct {
+	Username   string     `json:"username"`
+	Password   string     `json:"pass"`
+	FotoProfil string     `json:"fotoprofil"` //simpan alamatnya saja
+	Nama       string     `json:"nama"`
+	IdDiri     string     `json:"iddiri"`
+	JenisID    int        `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string     `json:"tgllahir"`
+	Norek      []Rekening `json:"norek"`
+	Email      string     `json:"email"`
+	Gender     string     `json:"gender"`
+	NoHp       string     `json:"nohp"`
+	Alamat     string     `json:"alamat"`
+}
+
+func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
+	w.WriteHeader(code)
+	//fmt.Fprintf(w, "{error: %i, message: %q}", code, pesan)
+	return "{error: " + strconv.Itoa(code) + ", message: " + pesan + "}"
+}
+
+/*func SuccessReturn(w http.ResponseWriter, json []byte, pesan string, code int) string {
+	w.WriteHeader(code)
+	//fmt.Fprintf(w, "{message: %q}", pesan)
+	return string(json)
+}*/
+
+func SuccessReturn(w http.ResponseWriter, pesan string, code int) string {
+	w.WriteHeader(code)
+	return "{success: " + strconv.Itoa(code) + ", message: " + pesan + "}"
+}
+
+func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) string {
+	var pengguna Pengguna
+
+	sesTambah := ses.Copy()
+	defer sesTambah.Close()
+
+	err := json.NewDecoder(r.Body).Decode(&pengguna)
+	if err != nil {
+		return ErrorReturn(w, "Registrasi Gagal", http.StatusBadRequest)
+
+	}
+
+	c := sesTambah.DB("propos").C("user")
+	encryptPass := sha256.Sum256([]byte(pengguna.Password))
+	pengguna.Password = fmt.Sprintf("%x", encryptPass)
+
+	err = c.Insert(pengguna)
+	if err != nil {
+		if mgo.IsDup(err) {
+			return ErrorReturn(w, "Username Sudah Digunakan", http.StatusBadRequest)
+		}
+		return ErrorReturn(w, "Tidak Ada Jaringan", http.StatusInternalServerError)
+	}
+
+	//json, _ := json.Marshal(pengguna)
+	return SuccessReturn(w, "Berhasil Registrasi", http.StatusCreated)
+}
+
+func UserController(urle string, w http.ResponseWriter, r *http.Request) string {
+	urle = urle[1:]
+	pathe := strings.Split(urle, "/")
+
+	ses, err := mgo.Dial("localhost:27017")
+	if err != nil {
+		panic(err)
+	}
+	defer ses.Close()
+	ses.SetMode(mgo.Monotonic, true)
+
+	if len(pathe) >= 2 {
+		if pathe[1] == "registrasi" {
+			return RegistrasiUser(ses, w, r)
+		}
+	}
+	return ErrorReturn(w, "Path Tidak Ditemukan", http.StatusNotFound)
+}

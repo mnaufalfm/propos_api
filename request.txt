@@ -1,0 +1,20 @@
+{
+	username: 'williamhanugra',
+	pass: 'ganteng123',
+	fotoprofil: 'blabla.jpg',
+	nama: 'Lu William Hanugra',
+	iddiri: '135060700111084',
+	jenisid: 1,
+	tgllahir: '14 April 2017',
+	norek: [{norekening:'44444',atasnama:'William Hanugra',bank:'IPB Syariah'}],
+	email: 'cipatonthesky@gmail.com',
+	gender: 'L',
+	nohp: '087873766464',
+	alamat: 'Pondok Bu Sri',
+}
+
+http://agrihack.party:2184/propos/
+
+caesarsolidivory@
+
+docker exec -it propos bash
