@@ -1,0 +1,116 @@
+2017-05-01T01:44:13.024+0700 I CONTROL  [main] Trying to start Windows service 'MongoDB'
+2017-05-01T01:44:13.025+0700 I CONTROL  [initandlisten] MongoDB starting : pid=2640 port=27017 dbpath=D:\Project\Go\propos_api\propos 64-bit host=Laper
+2017-05-01T01:44:13.026+0700 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-05-01T01:44:13.026+0700 I CONTROL  [initandlisten] db version v3.4.4
+2017-05-01T01:44:13.027+0700 I CONTROL  [initandlisten] git version: 888390515874a9debd1b6c5d36559ca86b44babd
+2017-05-01T01:44:13.027+0700 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-05-01T01:44:13.027+0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-05-01T01:44:13.027+0700 I CONTROL  [initandlisten] modules: none
+2017-05-01T01:44:13.028+0700 I CONTROL  [initandlisten] build environment:
+2017-05-01T01:44:13.028+0700 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-05-01T01:44:13.028+0700 I CONTROL  [initandlisten]     distarch: x86_64
+2017-05-01T01:44:13.028+0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-05-01T01:44:13.029+0700 I CONTROL  [initandlisten] options: { config: "C:\MongoDB\Server\3.4\bin\mongod.cfg", service: true, storage: { dbPath: "D:\Project\Go\propos_api\propos" }, systemLog: { destination: "file", path: "D:\Project\Go\propos_api\propos\mongod.log" } }
+2017-05-01T01:44:13.030+0700 I -        [initandlisten] Detected data files in D:\Project\Go\propos_api\propos created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-05-01T01:44:13.030+0700 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3515M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-05-01T01:44:14.233+0700 I CONTROL  [initandlisten] 
+2017-05-01T01:44:14.234+0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-05-01T01:44:14.234+0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-05-01T01:44:14.234+0700 I CONTROL  [initandlisten] 
+2017-05-01T01:44:15.090+0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'D:/Project/Go/propos_api/propos/diagnostic.data'
+2017-05-01T01:44:15.092+0700 I STORAGE  [initandlisten] Service running
+2017-05-01T01:44:15.092+0700 I NETWORK  [thread1] waiting for connections on port 27017
+2017-05-01T01:44:34.127+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58524 #1 (1 connection now open)
+2017-05-01T01:44:34.127+0700 I NETWORK  [conn1] received client metadata from 127.0.0.1:58524 conn1: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.4" }, os: { type: "Windows", name: "Microsoft Windows 8", architecture: "x86_64", version: "6.2 (build 9200)" } }
+2017-05-01T01:55:38.951+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58734 #2 (2 connections now open)
+2017-05-01T01:55:38.959+0700 I -        [conn2] end connection 127.0.0.1:58734 (2 connections now open)
+2017-05-01T01:56:04.304+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58736 #3 (2 connections now open)
+2017-05-01T01:56:04.306+0700 I -        [conn3] end connection 127.0.0.1:58736 (2 connections now open)
+2017-05-01T01:56:05.851+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58737 #4 (2 connections now open)
+2017-05-01T01:56:05.853+0700 I -        [conn4] end connection 127.0.0.1:58737 (2 connections now open)
+2017-05-01T02:11:24.394+0700 I COMMAND  [conn1] CMD: drop propos.user
+2017-05-01T02:12:05.873+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59533 #5 (2 connections now open)
+2017-05-01T02:12:06.006+0700 I COMMAND  [conn5] command propos.user command: insert { insert: "user", documents: [ { username: "", password: "184054b78da172c42e37015fb66dd6968b582846f4226c9edfad9da80dc2bf22", fotoprofil: "blabla.jpg", nama: "Lu William Hanugra", iddiri: "135060700111084", jenisid: 1, tgllahir: "14 April 2017", norek: [ { norekening: "44444", atasnama: "William Hanugra", bank: "IPB Syariah" } ], email: "cipatonthesky@gmail.com", gender: "L", nohp: "087873766464", alamat: "Pondok Bu Sri" } ], writeConcern: { getLastError: 1 }, ordered: true } ninserted:1 keysInserted:1 numYields:0 reslen:44 locks:{ Global: { acquireCount: { r: 3, w: 3 } }, Database: { acquireCount: { w: 2, W: 1 } }, Collection: { acquireCount: { w: 2 } } } protocol:op_query 125ms
+2017-05-01T02:12:06.007+0700 I -        [conn5] end connection 127.0.0.1:59533 (2 connections now open)
+2017-05-01T02:12:07.924+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59536 #6 (2 connections now open)
+2017-05-01T02:12:07.927+0700 I -        [conn6] end connection 127.0.0.1:59536 (2 connections now open)
+2017-05-01T02:16:09.946+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59883 #7 (2 connections now open)
+2017-05-01T02:16:10.075+0700 I INDEX    [conn7] build index on: propos.user properties: { v: 2, unique: true, key: { username: 1, iddiri: 1, email: 1, nohp: 1 }, name: "username_1_iddiri_1_email_1_nohp_1", ns: "propos.user", background: true, sparse: true }
+2017-05-01T02:16:10.076+0700 I INDEX    [conn7] build index done.  scanned 0 total records. 0 secs
+2017-05-01T02:16:10.076+0700 I COMMAND  [conn7] command propos.$cmd command: createIndexes { createIndexes: "user", indexes: [ { name: "username_1_iddiri_1_email_1_nohp_1", ns: "propos.user", key: { username: 1, iddiri: 1, email: 1, nohp: 1 }, unique: true, background: true, sparse: true } ] } numYields:0 reslen:113 locks:{ Global: { acquireCount: { r: 1, w: 1 } }, Database: { acquireCount: { w: 1, W: 2 } }, Collection: { acquireCount: { w: 1 } } } protocol:op_query 126ms
+2017-05-01T02:16:10.080+0700 I -        [conn7] end connection 127.0.0.1:59883 (2 connections now open)
+2017-05-01T02:17:10.880+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59908 #8 (2 connections now open)
+2017-05-01T02:17:10.899+0700 I -        [conn8] end connection 127.0.0.1:59908 (2 connections now open)
+2017-05-01T02:17:20.956+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59911 #9 (2 connections now open)
+2017-05-01T02:17:21.080+0700 I COMMAND  [conn9] command propos.user command: insert { insert: "user", documents: [ { username: "williamhanugra", password: "184054b78da172c42e37015fb66dd6968b582846f4226c9edfad9da80dc2bf22", fotoprofil: "blabla.jpg", nama: "Lu William Hanugra", iddiri: "135060700111084", jenisid: 1, tgllahir: "14 April 2017", norek: [ { norekening: "44444", atasnama: "William Hanugra", bank: "IPB Syariah" } ], email: "cipatonthesky@gmail.com", gender: "L", nohp: "087873766464", alamat: "Pondok Bu Sri" } ], writeConcern: { getLastError: 1 }, ordered: true } ninserted:0 keysInserted:1 exception: E11000 duplicate key error collection: propos.user index: username_1_iddiri_1_email_1_nohp_1 dup key: { : "williamhanugra", : "135060700111084", : "cipatonthesky@gmail.com", : "087873766464" } code:11000 numYields:0 reslen:296 locks:{ Global: { acquireCount: { r: 1, w: 1 } }, Database: { acquireCount: { w: 1 } }, Collection: { acquireCount: { w: 1 } } } protocol:op_query 122ms
+2017-05-01T02:17:21.083+0700 I -        [conn9] end connection 127.0.0.1:59911 (2 connections now open)
+2017-05-01T02:17:36.385+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59912 #10 (2 connections now open)
+2017-05-01T02:17:36.388+0700 I -        [conn10] end connection 127.0.0.1:59912 (2 connections now open)
+2017-05-01T02:18:22.595+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59929 #11 (2 connections now open)
+2017-05-01T02:18:22.598+0700 I -        [conn11] end connection 127.0.0.1:59929 (2 connections now open)
+2017-05-01T02:18:29.733+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59930 #12 (2 connections now open)
+2017-05-01T02:18:29.738+0700 I -        [conn12] end connection 127.0.0.1:59930 (2 connections now open)
+2017-05-01T02:18:31.834+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59931 #13 (2 connections now open)
+2017-05-01T02:18:31.837+0700 I -        [conn13] end connection 127.0.0.1:59931 (2 connections now open)
+2017-05-01T02:18:37.961+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59933 #14 (2 connections now open)
+2017-05-01T02:18:37.964+0700 I -        [conn14] end connection 127.0.0.1:59933 (2 connections now open)
+2017-05-01T02:18:46.325+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:59934 #15 (2 connections now open)
+2017-05-01T02:18:46.328+0700 I -        [conn15] end connection 127.0.0.1:59934 (2 connections now open)
+2017-05-01T02:24:36.227+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60143 #16 (2 connections now open)
+2017-05-01T02:24:36.234+0700 I -        [conn16] end connection 127.0.0.1:60143 (2 connections now open)
+2017-05-01T02:24:37.781+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60145 #17 (2 connections now open)
+2017-05-01T02:24:37.784+0700 I -        [conn17] end connection 127.0.0.1:60145 (2 connections now open)
+2017-05-01T03:01:18.417+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62055 #18 (2 connections now open)
+2017-05-01T03:01:18.426+0700 I -        [conn18] end connection 127.0.0.1:62055 (2 connections now open)
+2017-05-01T03:01:48.688+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62060 #19 (2 connections now open)
+2017-05-01T03:01:48.691+0700 I -        [conn19] end connection 127.0.0.1:62060 (2 connections now open)
+2017-05-01T03:01:49.719+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62061 #20 (2 connections now open)
+2017-05-01T03:01:49.722+0700 I -        [conn20] end connection 127.0.0.1:62061 (2 connections now open)
+2017-05-01T03:01:50.475+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62062 #21 (2 connections now open)
+2017-05-01T03:01:50.478+0700 I -        [conn21] end connection 127.0.0.1:62062 (2 connections now open)
+2017-05-01T03:01:51.131+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62063 #22 (2 connections now open)
+2017-05-01T03:01:51.134+0700 I -        [conn22] end connection 127.0.0.1:62063 (2 connections now open)
+2017-05-01T03:02:15.211+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62074 #23 (2 connections now open)
+2017-05-01T03:02:15.215+0700 I -        [conn23] end connection 127.0.0.1:62074 (2 connections now open)
+2017-05-01T03:02:20.116+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62079 #24 (2 connections now open)
+2017-05-01T03:02:20.122+0700 I -        [conn24] end connection 127.0.0.1:62079 (2 connections now open)
+2017-05-01T03:02:52.982+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62114 #25 (2 connections now open)
+2017-05-01T03:02:52.984+0700 I -        [conn25] end connection 127.0.0.1:62114 (2 connections now open)
+2017-05-01T03:02:53.902+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62116 #26 (2 connections now open)
+2017-05-01T03:02:53.904+0700 I -        [conn26] end connection 127.0.0.1:62116 (2 connections now open)
+2017-05-01T03:02:57.952+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62117 #27 (2 connections now open)
+2017-05-01T03:02:57.954+0700 I -        [conn27] end connection 127.0.0.1:62117 (2 connections now open)
+2017-05-01T03:03:03.637+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62121 #28 (2 connections now open)
+2017-05-01T03:03:03.644+0700 I -        [conn28] end connection 127.0.0.1:62121 (2 connections now open)
+2017-05-01T03:03:04.937+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62124 #29 (2 connections now open)
+2017-05-01T03:03:04.941+0700 I -        [conn29] end connection 127.0.0.1:62124 (2 connections now open)
+2017-05-01T03:03:32.425+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62188 #30 (2 connections now open)
+2017-05-01T03:03:32.434+0700 I -        [conn30] end connection 127.0.0.1:62188 (2 connections now open)
+2017-05-01T03:04:54.204+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62267 #31 (2 connections now open)
+2017-05-01T03:04:54.230+0700 I -        [conn31] end connection 127.0.0.1:62267 (2 connections now open)
+2017-05-01T03:05:33.892+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62285 #32 (2 connections now open)
+2017-05-01T03:05:33.897+0700 I -        [conn32] end connection 127.0.0.1:62285 (2 connections now open)
+2017-05-01T03:05:36.708+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62292 #33 (2 connections now open)
+2017-05-01T03:05:36.714+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62293 #34 (3 connections now open)
+2017-05-01T03:06:03.245+0700 I -        [conn33] end connection 127.0.0.1:62292 (3 connections now open)
+2017-05-01T03:06:03.245+0700 I -        [conn34] end connection 127.0.0.1:62293 (3 connections now open)
+2017-05-01T03:06:38.595+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62398 #35 (2 connections now open)
+2017-05-01T03:06:38.599+0700 I -        [conn35] end connection 127.0.0.1:62398 (2 connections now open)
+2017-05-01T03:06:41.632+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62405 #36 (2 connections now open)
+2017-05-01T03:06:56.633+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62408 #37 (3 connections now open)
+2017-05-01T03:07:36.285+0700 I -        [conn36] end connection 127.0.0.1:62405 (3 connections now open)
+2017-05-01T03:07:36.285+0700 I -        [conn37] end connection 127.0.0.1:62408 (2 connections now open)
+2017-05-01T03:07:41.946+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62428 #38 (2 connections now open)
+2017-05-01T03:07:41.952+0700 I -        [conn38] end connection 127.0.0.1:62428 (2 connections now open)
+2017-05-01T03:08:08.589+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62469 #39 (2 connections now open)
+2017-05-01T03:08:08.593+0700 I -        [conn39] end connection 127.0.0.1:62469 (2 connections now open)
+2017-05-01T03:08:11.384+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62475 #40 (2 connections now open)
+2017-05-01T03:08:11.390+0700 I -        [conn40] end connection 127.0.0.1:62475 (2 connections now open)
+2017-05-01T03:12:59.568+0700 I CONTROL  [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
+2017-05-01T03:12:59.568+0700 I NETWORK  [serviceShutdown] shutdown: going to close listening sockets...
+2017-05-01T03:12:59.569+0700 I NETWORK  [serviceShutdown] closing listening socket: 500
+2017-05-01T03:12:59.569+0700 I NETWORK  [serviceShutdown] shutdown: going to flush diaglog...
+2017-05-01T03:12:59.569+0700 I FTDC     [serviceShutdown] Shutting down full-time diagnostic data capture
+2017-05-01T03:12:59.574+0700 I STORAGE  [serviceShutdown] WiredTigerKVEngine shutting down
+2017-05-01T03:12:59.833+0700 I STORAGE  [serviceShutdown] shutdown: removing fs lock...
+2017-05-01T03:12:59.834+0700 I CONTROL  [serviceShutdown] now exiting

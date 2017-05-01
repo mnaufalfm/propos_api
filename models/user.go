@@ -11,6 +11,7 @@ import (
 	"strconv"
 
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Rekening struct {
@@ -51,6 +52,49 @@ func SuccessReturn(w http.ResponseWriter, pesan string, code int) string {
 	return "{success: " + strconv.Itoa(code) + ", message: " + pesan + "}"
 }
 
+func CheckDupUser(s *mgo.Session, p Pengguna) string {
+	var ret string
+
+	ses := s.Copy()
+	defer ses.Close()
+
+	c := ses.DB("propos").C("user")
+
+	d, _ := c.Find(bson.M{"username": p.Username}).Count()
+	if d > 0 {
+		ret = "Username"
+	}
+
+	d, _ = c.Find(bson.M{"iddiri": p.IdDiri}).Count()
+	if d > 0 {
+		if ret != "" {
+			ret = ret + ", ID Diri"
+		} else {
+			ret = "ID Diri"
+		}
+	}
+
+	d, _ = c.Find(bson.M{"email": p.Email}).Count()
+	if d > 0 {
+		if ret != "" {
+			ret = ret + ", Email"
+		} else {
+			ret = "Email"
+		}
+	}
+
+	d, _ = c.Find(bson.M{"nohp": p.NoHp}).Count()
+	if d > 0 {
+		if ret != "" {
+			ret = ret + ", Nomor Handphone"
+		} else {
+			ret = "Nomor Handphone"
+		}
+	}
+
+	return ret
+}
+
 func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 	var pengguna Pengguna
 
@@ -67,11 +111,16 @@ func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) st
 	encryptPass := sha256.Sum256([]byte(pengguna.Password))
 	pengguna.Password = fmt.Sprintf("%x", encryptPass)
 
+	checkdup := CheckDupUser(ses, pengguna)
+	if checkdup != "" {
+		return ErrorReturn(w, checkdup+" Sudah Digunakan", http.StatusBadRequest)
+	}
 	err = c.Insert(pengguna)
 	if err != nil {
-		if mgo.IsDup(err) {
+		/*if mgo.IsDup(err) {
+			fmt.Println(err)
 			return ErrorReturn(w, "Username Sudah Digunakan", http.StatusBadRequest)
-		}
+		}*/
 		return ErrorReturn(w, "Tidak Ada Jaringan", http.StatusInternalServerError)
 	}
 
@@ -79,7 +128,84 @@ func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) st
 	return SuccessReturn(w, "Berhasil Registrasi", http.StatusCreated)
 }
 
+func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
+	//Jika membuka profil user lain
+	var user Pengguna
+	ses := s.Copy()
+	defer ses.Close()
+
+	c := ses.DB("propos").C("user")
+
+	err := c.Find(bson.M{"username": path}).One(&user)
+	if err != nil {
+		return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	us, _ := json.Marshal(user)
+	return string(us)
+}
+
+func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
+
+}
+
+func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
+	//Digunakan untuk login ke halaman user
+	var log Pengguna
+	ses := s.Copy()
+	defer ses.Close()
+
+	err := json.NewDecoder(r.Body).Decode(&log)
+	if err != nil {
+		return ErrorReturn(w, "Login Gagal", http.StatusBadRequest)
+	}
+
+	c := ses.DB("propos").C("user")
+
+	encryptPassLogin := sha256.Sum256([]byte(log.Password))
+
+	err = c.Find(bson.M{"username": log.Username}).One(&log)
+	if err != nil {
+		return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
+	}
+
+	encryptPass := sha256.Sum256([]byte(log.Password))
+	if encryptPass == encryptPassLogin {
+		w.WriteHeader(http.StatusOK)
+		retBody, err := json.MarshalIndent(log, "", " ")
+		if err != nil {
+			panic(err)
+		}
+		return string(retBody) //nanti di-lock pake jwt
+	}
+
+	return ErrorReturn(w, "Password Salah", http.StatusForbidden)
+}
+
+/*func IndexCreating(s *mgo.Session) {
+	ses := s.Copy()
+	defer ses.Close()
+
+	c := ses.DB("propos").C("user")
+
+	index := mgo.Index{
+		Key:        []string{"username", "iddiri", "email", "nohp"},
+		Unique:     true,
+		DropDups:   false,
+		Background: true, // See notes.
+		Sparse:     true,
+	}
+
+	err := c.EnsureIndex(index)
+	if err != nil {
+		panic(err)
+	}
+
+}*/
+
 func UserController(urle string, w http.ResponseWriter, r *http.Request) string {
+
 	urle = urle[1:]
 	pathe := strings.Split(urle, "/")
 
@@ -89,10 +215,17 @@ func UserController(urle string, w http.ResponseWriter, r *http.Request) string 
 	}
 	defer ses.Close()
 	ses.SetMode(mgo.Monotonic, true)
+	//IndexCreating(ses)
+
+	if pathe[0] == "login" {
+		LoginUser(ses, w, r)
+	}
 
 	if len(pathe) >= 2 {
 		if pathe[1] == "registrasi" {
 			return RegistrasiUser(ses, w, r)
+		} else if pathe[1] != "" {
+			return GetUser(ses, w, r, pathe[1])
 		}
 	}
 	return ErrorReturn(w, "Path Tidak Ditemukan", http.StatusNotFound)

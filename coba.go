@@ -1,11 +1,13 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
-/*type Rekening struct {
+type Rekening struct {
 	NoRekening string `json:"norekening"`
 	AtasNama   string `json:"atasnama"`
 	Bank       string `json:"bank"`
@@ -24,9 +26,9 @@ type Pengguna struct {
 	Gender     string     `json:"gender"`
 	NoHp       string     `json:"nohp"`
 	Alamat     string     `json:"alamat"`
-}*/
+}
 
-type Biasa struct {
+/*type Biasa struct {
 	Nama  string `json:"nama"`
 	Kelas string `json:"kelas"`
 }
@@ -35,22 +37,22 @@ type Berisik struct {
 	Maklumi string  `json:"maklumi"`
 	Haha    string  `json:"haha"`
 	Hihi    []Biasa `json:"hihi"`
-}
+}*/
 
 func main() {
-	var berisik Berisik
+	//var berisik Berisik
 
-	jsonhaha := []byte(`{"maklumi":"cacat","haha":"blabla","hihi":[{"nama":"william","kelas":"5A"},{"nama":"lemah","kelas":"6B"}]}`)
+	//jsonhaha := []byte(`{"maklumi":"cacat","haha":"blabla"}`)
 	//jsonblob := "{username: 'williamhanugra', pass: 'ganteng123', fotoprofil: 'blabla.jpg',nama: 'Lu William Hanugra',iddiri: '135060700111084',jenisid: 1,tgllahir: '14 April 2017',norek: [{norekening:'44444',atasnama:'William Hanugra',bank:'IPB Syariah'}],email: 'cipatonthesky@gmail.com',gender: 'L',nohp: '087873766464',alamat: 'Pondok Bu Sri'}"
 
 	//fmt.Println(json)
-	err := json.Unmarshal(jsonhaha, &berisik)
-	if err != nil {
+	//err := json.Unmarshal(jsonhaha, &berisik)
+	/*if err != nil {
 		fmt.Println("Gagal coy")
 	}
-	fmt.Printf("%+v", berisik)
-	fmt.Println()
-	fmt.Printf("%+v", berisik.Hihi[0])
+	fmt.Printf("%+v", berisik)*/
+	//fmt.Println()
+	//fmt.Printf("%+v", berisik.Hihi[0])
 
 	/*type ColorGroup struct {
 		Status  int    `json:"status"`
@@ -82,4 +84,21 @@ func main() {
 	/*var sum string
 	sum = fmt.Sprintf("%x", sha256.Sum256([]byte("hello world\n")))
 	fmt.Println(sum)*/
+
+	var user Pengguna
+	ses, err := mgo.Dial("localhost:27017")
+	if err != nil {
+		panic(err)
+	}
+
+	defer ses.Close()
+	ses.SetMode(mgo.Monotonic, true)
+
+	c := ses.DB("propos").C("user")
+
+	err = c.Find(bson.M{"username": "wiliiam"}).One(&user)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v", user)
 }
