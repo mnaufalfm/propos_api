@@ -20,7 +20,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.Handle("/user/", pengg)
-	mux.Handle("/login/", pengguna)
+	mux.Handle("/login/", pengg)
 
 	http.ListenAndServe("localhost:9000", mux)
 }
