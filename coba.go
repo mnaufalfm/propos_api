@@ -1,12 +1,5 @@
 package main
 
-import (
-	"fmt"
-
-	mgo "gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
-)
-
 type Rekening struct {
 	NoRekening string `json:"norekening"`
 	AtasNama   string `json:"atasnama"`
@@ -85,7 +78,7 @@ func main() {
 	sum = fmt.Sprintf("%x", sha256.Sum256([]byte("hello world\n")))
 	fmt.Println(sum)*/
 
-	var user Pengguna
+	/*var user Pengguna
 	ses, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -100,5 +93,24 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%+v", user)
+	fmt.Printf("%+v", user)*/
+
+	//data := []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9")
+	//a := make([]byte, base64.RawStdEncoding.EncodedLen(len(data)))
+	//str := base64.StdEncoding.EncodeToString(data)
+	//base64.RawStdEncoding.Encode(a, data)
+	//fmt.Println(hex.EncodeToString(a))
+	//fmt.Printf("%x", a)
+	//fmt.Println(str)
+
+	//kun := []byte("berisikamatlu")
+	//pes := []byte(mes)
+	//h := hmac.New(sha256.New, kun)
+	//h.Write(data)
+	//fmt.Println(base64.RawStdEncoding.EncodeToString(h.Sum(nil)))
+	//pass := "ganteng123"
+
+	//fmt.Println(fmt.Sprintf("%x", sha256.Sum256([]byte(pass))))
+
+	//fmt.Println(string("184054b78da172c42e37015fb66dd6968b582846f4226c9edfad9da80dc2bf22"))
 }

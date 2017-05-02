@@ -1,0 +1,36 @@
+2017-05-01T13:31:31.593+0700 I CONTROL  [main] Trying to start Windows service 'MongoDB'
+2017-05-01T13:31:31.594+0700 I CONTROL  [initandlisten] MongoDB starting : pid=7400 port=27017 dbpath=D:\Project\Go\propos_api\propos 64-bit host=Laper
+2017-05-01T13:31:31.594+0700 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-05-01T13:31:31.595+0700 I CONTROL  [initandlisten] db version v3.4.4
+2017-05-01T13:31:31.595+0700 I CONTROL  [initandlisten] git version: 888390515874a9debd1b6c5d36559ca86b44babd
+2017-05-01T13:31:31.596+0700 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-05-01T13:31:31.596+0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-05-01T13:31:31.596+0700 I CONTROL  [initandlisten] modules: none
+2017-05-01T13:31:31.597+0700 I CONTROL  [initandlisten] build environment:
+2017-05-01T13:31:31.597+0700 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-05-01T13:31:31.597+0700 I CONTROL  [initandlisten]     distarch: x86_64
+2017-05-01T13:31:31.597+0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-05-01T13:31:31.597+0700 I CONTROL  [initandlisten] options: { config: "C:\MongoDB\Server\3.4\bin\mongod.cfg", service: true, storage: { dbPath: "D:\Project\Go\propos_api\propos" }, systemLog: { destination: "file", path: "D:\Project\Go\propos_api\propos\mongod.log" } }
+2017-05-01T13:31:31.598+0700 I -        [initandlisten] Detected data files in D:\Project\Go\propos_api\propos created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-05-01T13:31:31.599+0700 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3515M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-05-01T13:31:32.921+0700 I CONTROL  [initandlisten] 
+2017-05-01T13:31:32.921+0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-05-01T13:31:32.921+0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-05-01T13:31:32.922+0700 I CONTROL  [initandlisten] 
+2017-05-01T13:31:34.299+0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'D:/Project/Go/propos_api/propos/diagnostic.data'
+2017-05-01T13:31:34.300+0700 I STORAGE  [initandlisten] Service running
+2017-05-01T13:31:34.300+0700 I NETWORK  [thread1] waiting for connections on port 27017
+2017-05-01T13:31:48.121+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53055 #1 (1 connection now open)
+2017-05-01T13:31:48.122+0700 I NETWORK  [conn1] received client metadata from 127.0.0.1:53055 conn1: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.4" }, os: { type: "Windows", name: "Microsoft Windows 8", architecture: "x86_64", version: "6.2 (build 9200)" } }
+2017-05-01T13:43:04.186+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53731 #2 (2 connections now open)
+2017-05-01T13:43:04.197+0700 I -        [conn2] end connection 127.0.0.1:53731 (2 connections now open)
+2017-05-01T13:44:32.860+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53949 #3 (2 connections now open)
+2017-05-01T13:44:32.885+0700 I -        [conn3] end connection 127.0.0.1:53949 (2 connections now open)
+2017-05-01T16:16:09.368+0700 I CONTROL  [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
+2017-05-01T16:16:09.368+0700 I NETWORK  [serviceShutdown] shutdown: going to close listening sockets...
+2017-05-01T16:16:09.368+0700 I NETWORK  [serviceShutdown] closing listening socket: 500
+2017-05-01T16:16:09.369+0700 I NETWORK  [serviceShutdown] shutdown: going to flush diaglog...
+2017-05-01T16:16:09.369+0700 I FTDC     [serviceShutdown] Shutting down full-time diagnostic data capture
+2017-05-01T16:16:09.375+0700 I STORAGE  [serviceShutdown] WiredTigerKVEngine shutting down
+2017-05-01T16:16:09.678+0700 I STORAGE  [serviceShutdown] shutdown: removing fs lock...
+2017-05-01T16:16:09.679+0700 I CONTROL  [serviceShutdown] now exiting

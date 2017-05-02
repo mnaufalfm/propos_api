@@ -12,6 +12,8 @@ import (
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
+	"../../authorization"
 )
 
 type Rekening struct {
@@ -21,18 +23,19 @@ type Rekening struct {
 }
 
 type Pengguna struct {
-	Username   string     `json:"username"`
-	Password   string     `json:"pass"`
-	FotoProfil string     `json:"fotoprofil"` //simpan alamatnya saja
-	Nama       string     `json:"nama"`
-	IdDiri     string     `json:"iddiri"`
-	JenisID    int        `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
-	TglLahir   string     `json:"tgllahir"`
-	Norek      []Rekening `json:"norek"`
-	Email      string     `json:"email"`
-	Gender     string     `json:"gender"`
-	NoHp       string     `json:"nohp"`
-	Alamat     string     `json:"alamat"`
+	Id         bson.ObjectId `json:"id" bson:"_id,omitempty"`
+	Username   string        `json:"username"`
+	Password   string        `json:"password"`
+	FotoProfil string        `json:"fotoprofil"` //simpan alamatnya saja
+	Nama       string        `json:"nama"`
+	IdDiri     string        `json:"iddiri"`
+	JenisID    int           `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string        `json:"tgllahir"`
+	Norek      []Rekening    `json:"norek"`
+	Email      string        `json:"email"`
+	Gender     string        `json:"gender"`
+	NoHp       string        `json:"nohp"`
+	Alamat     string        `json:"alamat"`
 }
 
 func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
@@ -146,9 +149,9 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 	return string(us)
 }
 
-func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
+/*func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 
-}
+}*/
 
 func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 	//Digunakan untuk login ke halaman user
@@ -156,28 +159,35 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 	ses := s.Copy()
 	defer ses.Close()
 
+	//fmt.Println("Login User")
+
 	err := json.NewDecoder(r.Body).Decode(&log)
 	if err != nil {
+		//fmt.Println("Cari data")
 		return ErrorReturn(w, "Login Gagal", http.StatusBadRequest)
 	}
 
 	c := ses.DB("propos").C("user")
 
-	encryptPassLogin := sha256.Sum256([]byte(log.Password))
+	encryptPassLogin := fmt.Sprintf("%x", sha256.Sum256([]byte(log.Password)))
 
 	err = c.Find(bson.M{"username": log.Username}).One(&log)
 	if err != nil {
+		//fmt.Println("User Hilang")
 		return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
 	}
 
-	encryptPass := sha256.Sum256([]byte(log.Password))
+	encryptPass := log.Password
+	//fmt.Println(encryptPass + " " + encryptPassLogin + " " + log.Password)
 	if encryptPass == encryptPassLogin {
 		w.WriteHeader(http.StatusOK)
+		//fmt.Println("Tukang Hacking")
 		retBody, err := json.MarshalIndent(log, "", " ")
 		if err != nil {
 			panic(err)
 		}
-		return string(retBody) //nanti di-lock pake jwt
+		return jwt.TokenMaker(string(retBody), "anggunauranaufalwilliam")
+		fmt.Println(log.Id) //nanti di-lock pake jwt
 	}
 
 	return ErrorReturn(w, "Password Salah", http.StatusForbidden)
@@ -204,10 +214,12 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 
 }*/
 
+//Digunakan untuk mengontrol path dari user (/user/...)
 func UserController(urle string, w http.ResponseWriter, r *http.Request) string {
 
 	urle = urle[1:]
 	pathe := strings.Split(urle, "/")
+	fmt.Println(pathe[0] + " " + pathe[1])
 
 	ses, err := mgo.Dial("localhost:27017")
 	if err != nil {
@@ -218,7 +230,7 @@ func UserController(urle string, w http.ResponseWriter, r *http.Request) string 
 	//IndexCreating(ses)
 
 	if pathe[0] == "login" {
-		LoginUser(ses, w, r)
+		return LoginUser(ses, w, r)
 	}
 
 	if len(pathe) >= 2 {
