@@ -1,5 +1,5 @@
 # propos_api
-API for Propos Application. Develop by using Go Language and MongoDB for database
+API for Propos Application. Developed by using Go Language and MongoDB for database
 
 Cara Menggunakan:
 1. Install MongoDB dan Go terlebih dahulu
