@@ -146,6 +146,7 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 		return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
 	}
 
+	//Pengaturan return untuk mengatur pengembalian data berdasarkan siapa yang membuka dan profil siapa yang dibuka (belum dilakukan)
 	w.WriteHeader(http.StatusOK)
 	us, _ := json.Marshal(user)
 	return string(us)
@@ -164,10 +165,10 @@ func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path strin
 	}
 	fmt.Println(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2])
 	if !jwt.CheckToken(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2]) {
-		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusBadRequest)
+		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusForbidden)
 	}
 	mess := jwt.Base64ToString(tokenSplit[1])
-	fmt.Println(mess)
+	//fmt.Println(mess)
 
 	//kk, _ := json.Marshal(mess)
 	err := json.Unmarshal([]byte(mess), &sebelumEdit)
@@ -185,7 +186,10 @@ func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path strin
 
 	c := s.DB("propos").C("user")
 
-	_ = c.Update(bson.M{"username": sebelumEdit.Username}, bson.M{"$set": bsonn})
+	err = c.Update(bson.M{"username": sebelumEdit.Username}, bson.M{"$set": bsonn})
+	if err != nil {
+		return ErrorReturn(w, "Gagal Edit Data", http.StatusBadRequest)
+	}
 
 	return SuccessReturn(w, "Berhasil Edit Data", http.StatusOK)
 }
