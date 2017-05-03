@@ -5,8 +5,8 @@ import (
 
 	"io"
 
+	//"./models/projek"
 	"./models/user"
-	"./models/projek"
 )
 
 type UserHandler int
@@ -17,8 +17,8 @@ func (u UserHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	io.WriteString(res, user.UserController(req.RequestURI, res, req))
 }
 
-func (p ProjekHandler) ServeHTTP(res http.ResponseWriter, req, *http.Request) {
-	io.WriteString(res, projek.ProjekController(req.RequestURI, res, req))
+func (p ProjekHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	//io.WriteString(res, projek.ProjekController(req.RequestURI, res, req))
 }
 
 func main() {
@@ -28,10 +28,9 @@ func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/user/", pengg)
 	mux.Handle("/login/", pengg)
-<<<<<<< HEAD
+	mux.Handle("/registrasi/", pengg)
+	mux.Handle("/edit/", pengg)
 	mux.Handle("/projek/", proj)
-=======
->>>>>>> origin/master
 
 	http.ListenAndServe("localhost:9000", mux)
 }

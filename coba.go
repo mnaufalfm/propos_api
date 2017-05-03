@@ -1,6 +1,17 @@
 package main
 
-type Rekening struct {
+import (
+	"fmt"
+
+	"net/http"
+
+	"io/ioutil"
+
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
+)
+
+/*type Rekening struct {
 	NoRekening string `json:"norekening"`
 	AtasNama   string `json:"atasnama"`
 	Bank       string `json:"bank"`
@@ -19,48 +30,78 @@ type Pengguna struct {
 	Gender     string     `json:"gender"`
 	NoHp       string     `json:"nohp"`
 	Alamat     string     `json:"alamat"`
+}*/
+
+type Rekening struct {
+	NoRekening string `json:",omitempty"`
+	AtasNama   string `json:",omitempty"`
+	Bank       string `json:",omitempty"`
 }
 
-/*type Biasa struct {
+type Pengguna struct {
+	Id         bson.ObjectId `json:",omitempty" bson:"_id,omitempty"`
+	Username   string        `json:",omitempty"`
+	Password   string        `json:",omitempty"`
+	FotoProfil string        `json:",omitempty"` //simpan alamatnya saja
+	Nama       string        `json:",omitempty"`
+	IdDiri     string        `json:",omitempty"`
+	JenisID    int           `json:",omitempty"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string        `json:",omitempty"`
+	Norek      []Rekening    `json:",omitempty"`
+	Email      string        `json:",omitempty"`
+	Gender     string        `json:",omitempty"`
+	NoHp       string        `json:",omitempty"`
+	Alamat     string        `json:",omitempty"`
+}
+
+type Biasa struct {
 	Nama  string `json:"nama"`
 	Kelas string `json:"kelas"`
 }
 
 type Berisik struct {
-	Maklumi string  `json:"maklumi"`
+	Maklumi int     `json:"maklumi"`
 	Haha    string  `json:"haha"`
 	Hihi    []Biasa `json:"hihi"`
-}*/
+}
 
 func main() {
 	//var berisik Berisik
 
-	//jsonhaha := []byte(`{"maklumi":"cacat","haha":"blabla"}`)
+	//jsonhaha := []byte(`{"maklumi":5,"haha":"blabla"}`)
 	//jsonblob := "{username: 'williamhanugra', pass: 'ganteng123', fotoprofil: 'blabla.jpg',nama: 'Lu William Hanugra',iddiri: '135060700111084',jenisid: 1,tgllahir: '14 April 2017',norek: [{norekening:'44444',atasnama:'William Hanugra',bank:'IPB Syariah'}],email: 'cipatonthesky@gmail.com',gender: 'L',nohp: '087873766464',alamat: 'Pondok Bu Sri'}"
 
 	//fmt.Println(json)
 	//err := json.Unmarshal(jsonhaha, &berisik)
-	/*if err != nil {
-		fmt.Println("Gagal coy")
-	}
-	fmt.Printf("%+v", berisik)*/
+	//if err != nil {
+	//	fmt.Println("Gagal coy")
+	//}
+	//fmt.Printf("%+v", berisik)
+
+	//bb := reflect.ValueOf(&berisik).Elem()
+	//for i := 0; i < bb.NumField(); i++ {
+	//	fmt.Printf("%s %s %v\n", bb.Type().Field(i).Name, bb.Type(), bb.Field(i).Interface())
+	//}
 	//fmt.Println()
 	//fmt.Printf("%+v", berisik.Hihi[0])
 
 	/*type ColorGroup struct {
 		Status  int    `json:"status"`
 		Message string `json:"message"`
-	}*/
-	/*var b Pengguna
-	err := json.NewDecoder([]byte(jsonblob)).Decode(&b)
-	//var cg ColorGroup
-	//a := "{status: 1, message: 'Reds'}"
-	//err := json.NewDecoder(fmt.Scan()).Decode(&cg)
+	}
+	//var b Pengguna
+	//err := json.NewDecoder([]byte(jsonblob)).Decode(&b)
+	var cg ColorGroup
+	a := []byte(`{"status": 1, "message": "Reds"}`)
+	err := json.Unmarshal(a, cg)
 	if err != nil {
 		fmt.Println("error:", err)
 	}
+	bb := reflect.ValueOf(&cg).Elem()
+	for i := 0; i < bb.NumField(); i++ {
+		fmt.Println(bb.Field(i).Interface())
+	}*/
 	//os.Stdout.Write(b)
-	fmt.Println(b.Username)*/
 
 	/*s := "/guru/edit"
 	s = s[1:]
@@ -78,7 +119,8 @@ func main() {
 	sum = fmt.Sprintf("%x", sha256.Sum256([]byte("hello world\n")))
 	fmt.Println(sum)*/
 
-	/*var user Pengguna
+	var user Pengguna
+	http.ListenAndServe(":9000", nil)
 	ses, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -89,11 +131,15 @@ func main() {
 
 	c := ses.DB("propos").C("user")
 
-	err = c.Find(bson.M{"username": "wiliiam"}).One(&user)
+	err = c.Find(bson.M{"username": "williamhanug"}).One(&user)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%+v", user)*/
+	fmt.Printf("%+v", user)
+	fmt.Println()
+	if user.TglLahir == "" {
+		fmt.Println("Kosong coy")
+	}
 
 	//data := []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9")
 	//a := make([]byte, base64.RawStdEncoding.EncodedLen(len(data)))

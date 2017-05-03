@@ -1,60 +1,142 @@
-2017-05-02T05:53:19.733+0700 I CONTROL  [main] Trying to start Windows service 'MongoDB'
-2017-05-02T05:53:19.735+0700 I CONTROL  [initandlisten] MongoDB starting : pid=4688 port=27017 dbpath=D:\Project\Go\propos_api\propos 64-bit host=Laper
-2017-05-02T05:53:19.735+0700 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
-2017-05-02T05:53:19.735+0700 I CONTROL  [initandlisten] db version v3.4.4
-2017-05-02T05:53:19.736+0700 I CONTROL  [initandlisten] git version: 888390515874a9debd1b6c5d36559ca86b44babd
-2017-05-02T05:53:19.736+0700 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
-2017-05-02T05:53:19.736+0700 I CONTROL  [initandlisten] allocator: tcmalloc
-2017-05-02T05:53:19.736+0700 I CONTROL  [initandlisten] modules: none
-2017-05-02T05:53:19.902+0700 I CONTROL  [initandlisten] build environment:
-2017-05-02T05:53:19.902+0700 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
-2017-05-02T05:53:19.902+0700 I CONTROL  [initandlisten]     distarch: x86_64
-2017-05-02T05:53:19.903+0700 I CONTROL  [initandlisten]     target_arch: x86_64
-2017-05-02T05:53:19.903+0700 I CONTROL  [initandlisten] options: { config: "C:\MongoDB\Server\3.4\bin\mongod.cfg", service: true, storage: { dbPath: "D:\Project\Go\propos_api\propos" }, systemLog: { destination: "file", path: "D:\Project\Go\propos_api\propos\mongod.log" } }
-2017-05-02T05:53:19.906+0700 I -        [initandlisten] Detected data files in D:\Project\Go\propos_api\propos created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
-2017-05-02T05:53:19.907+0700 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3515M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
-2017-05-02T05:53:21.040+0700 I CONTROL  [initandlisten] 
-2017-05-02T05:53:21.040+0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
-2017-05-02T05:53:21.040+0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
-2017-05-02T05:53:21.041+0700 I CONTROL  [initandlisten] 
-2017-05-02T05:53:21.706+0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'D:/Project/Go/propos_api/propos/diagnostic.data'
-2017-05-02T05:53:21.708+0700 I STORAGE  [initandlisten] Service running
-2017-05-02T05:53:21.708+0700 I NETWORK  [thread1] waiting for connections on port 27017
-2017-05-02T05:53:28.530+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:62207 #1 (1 connection now open)
-2017-05-02T05:53:28.531+0700 I NETWORK  [conn1] received client metadata from 127.0.0.1:62207 conn1: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.4" }, os: { type: "Windows", name: "Microsoft Windows 8", architecture: "x86_64", version: "6.2 (build 9200)" } }
-2017-05-02T08:21:10.988+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:49994 #2 (2 connections now open)
-2017-05-02T08:21:11.073+0700 I -        [conn2] end connection 127.0.0.1:49994 (2 connections now open)
-2017-05-02T08:24:45.728+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50079 #3 (2 connections now open)
-2017-05-02T08:24:45.772+0700 I -        [conn3] end connection 127.0.0.1:50079 (2 connections now open)
-2017-05-02T08:26:15.713+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50235 #4 (2 connections now open)
-2017-05-02T08:26:15.721+0700 I -        [conn4] end connection 127.0.0.1:50235 (2 connections now open)
-2017-05-02T08:30:49.979+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50373 #5 (2 connections now open)
-2017-05-02T08:30:49.990+0700 I -        [conn5] end connection 127.0.0.1:50373 (2 connections now open)
-2017-05-02T08:31:56.070+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50439 #6 (2 connections now open)
-2017-05-02T08:31:56.081+0700 I -        [conn6] end connection 127.0.0.1:50439 (2 connections now open)
-2017-05-02T08:32:26.916+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50497 #7 (2 connections now open)
-2017-05-02T08:32:26.927+0700 I -        [conn7] end connection 127.0.0.1:50497 (2 connections now open)
-2017-05-02T08:33:04.670+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50502 #8 (2 connections now open)
-2017-05-02T08:33:04.672+0700 I -        [conn8] end connection 127.0.0.1:50502 (2 connections now open)
-2017-05-02T08:34:29.924+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50673 #9 (2 connections now open)
-2017-05-02T08:34:29.930+0700 I -        [conn9] end connection 127.0.0.1:50673 (2 connections now open)
-2017-05-02T08:40:56.769+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:50798 #10 (2 connections now open)
-2017-05-02T08:40:56.775+0700 I -        [conn10] end connection 127.0.0.1:50798 (2 connections now open)
-2017-05-02T08:45:52.311+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:51167 #11 (2 connections now open)
-2017-05-02T08:45:52.318+0700 I -        [conn11] end connection 127.0.0.1:51167 (2 connections now open)
-2017-05-02T08:49:07.105+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:51536 #12 (2 connections now open)
-2017-05-02T08:49:07.114+0700 I -        [conn12] end connection 127.0.0.1:51536 (2 connections now open)
-2017-05-02T08:50:00.214+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:51611 #13 (2 connections now open)
-2017-05-02T08:50:00.221+0700 I -        [conn13] end connection 127.0.0.1:51611 (2 connections now open)
-2017-05-02T08:52:32.974+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:51736 #14 (2 connections now open)
-2017-05-02T08:52:32.980+0700 I -        [conn14] end connection 127.0.0.1:51736 (2 connections now open)
-2017-05-02T08:52:47.416+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:51740 #15 (2 connections now open)
-2017-05-02T08:52:47.419+0700 I -        [conn15] end connection 127.0.0.1:51740 (2 connections now open)
-2017-05-02T09:13:08.602+0700 I CONTROL  [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
-2017-05-02T09:13:08.603+0700 I NETWORK  [serviceShutdown] shutdown: going to close listening sockets...
-2017-05-02T09:13:08.603+0700 I NETWORK  [serviceShutdown] closing listening socket: 500
-2017-05-02T09:13:08.603+0700 I NETWORK  [serviceShutdown] shutdown: going to flush diaglog...
-2017-05-02T09:13:08.603+0700 I FTDC     [serviceShutdown] Shutting down full-time diagnostic data capture
-2017-05-02T09:13:08.608+0700 I STORAGE  [serviceShutdown] WiredTigerKVEngine shutting down
-2017-05-02T09:13:09.033+0700 I STORAGE  [serviceShutdown] shutdown: removing fs lock...
-2017-05-02T09:13:09.034+0700 I CONTROL  [serviceShutdown] now exiting
+2017-05-03T10:18:07.226+0700 I CONTROL  [main] Trying to start Windows service 'MongoDB'
+2017-05-03T10:18:07.228+0700 I CONTROL  [initandlisten] MongoDB starting : pid=7760 port=27017 dbpath=D:\Project\Go\propos_api\propos 64-bit host=Laper
+2017-05-03T10:18:07.228+0700 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-05-03T10:18:07.229+0700 I CONTROL  [initandlisten] db version v3.4.4
+2017-05-03T10:18:07.229+0700 I CONTROL  [initandlisten] git version: 888390515874a9debd1b6c5d36559ca86b44babd
+2017-05-03T10:18:07.229+0700 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-05-03T10:18:07.230+0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-05-03T10:18:07.230+0700 I CONTROL  [initandlisten] modules: none
+2017-05-03T10:18:07.231+0700 I CONTROL  [initandlisten] build environment:
+2017-05-03T10:18:07.231+0700 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-05-03T10:18:07.231+0700 I CONTROL  [initandlisten]     distarch: x86_64
+2017-05-03T10:18:07.231+0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-05-03T10:18:07.231+0700 I CONTROL  [initandlisten] options: { config: "C:\MongoDB\Server\3.4\bin\mongod.cfg", service: true, storage: { dbPath: "D:\Project\Go\propos_api\propos" }, systemLog: { destination: "file", path: "D:\Project\Go\propos_api\propos\mongod.log" } }
+2017-05-03T10:18:07.233+0700 I -        [initandlisten] Detected data files in D:\Project\Go\propos_api\propos created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-05-03T10:18:07.233+0700 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3515M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-05-03T10:18:10.742+0700 I CONTROL  [initandlisten] 
+2017-05-03T10:18:10.742+0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-05-03T10:18:10.743+0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-05-03T10:18:10.743+0700 I CONTROL  [initandlisten] 
+2017-05-03T10:18:13.167+0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'D:/Project/Go/propos_api/propos/diagnostic.data'
+2017-05-03T10:18:13.197+0700 I STORAGE  [initandlisten] Service running
+2017-05-03T10:18:13.234+0700 I NETWORK  [thread1] waiting for connections on port 27017
+2017-05-03T10:46:49.454+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:51594 #1 (1 connection now open)
+2017-05-03T10:46:49.463+0700 I -        [conn1] end connection 127.0.0.1:51594 (1 connection now open)
+2017-05-03T11:11:32.045+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53449 #2 (1 connection now open)
+2017-05-03T11:11:32.046+0700 I NETWORK  [conn2] received client metadata from 127.0.0.1:53449 conn2: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.4" }, os: { type: "Windows", name: "Microsoft Windows 8", architecture: "x86_64", version: "6.2 (build 9200)" } }
+2017-05-03T11:13:35.742+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53476 #3 (2 connections now open)
+2017-05-03T11:13:35.751+0700 I -        [conn3] end connection 127.0.0.1:53476 (2 connections now open)
+2017-05-03T11:15:00.696+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53501 #4 (2 connections now open)
+2017-05-03T11:15:00.698+0700 I -        [conn4] end connection 127.0.0.1:53501 (2 connections now open)
+2017-05-03T11:15:23.670+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53505 #5 (2 connections now open)
+2017-05-03T11:15:23.673+0700 I -        [conn5] end connection 127.0.0.1:53505 (2 connections now open)
+2017-05-03T11:15:38.333+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53506 #6 (2 connections now open)
+2017-05-03T11:15:38.337+0700 I -        [conn6] end connection 127.0.0.1:53506 (2 connections now open)
+2017-05-03T11:17:30.388+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53598 #7 (2 connections now open)
+2017-05-03T11:17:30.390+0700 I -        [conn7] end connection 127.0.0.1:53598 (2 connections now open)
+2017-05-03T11:18:44.071+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53716 #8 (2 connections now open)
+2017-05-03T11:18:44.075+0700 I -        [conn8] end connection 127.0.0.1:53716 (2 connections now open)
+2017-05-03T11:20:07.060+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53843 #9 (2 connections now open)
+2017-05-03T11:20:07.065+0700 I -        [conn9] end connection 127.0.0.1:53843 (2 connections now open)
+2017-05-03T11:20:46.358+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:53942 #10 (2 connections now open)
+2017-05-03T11:20:46.381+0700 I -        [conn10] end connection 127.0.0.1:53942 (2 connections now open)
+2017-05-03T11:22:22.616+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54025 #11 (2 connections now open)
+2017-05-03T11:22:22.620+0700 I -        [conn11] end connection 127.0.0.1:54025 (2 connections now open)
+2017-05-03T11:22:53.481+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54031 #12 (2 connections now open)
+2017-05-03T11:22:53.539+0700 I -        [conn12] end connection 127.0.0.1:54031 (2 connections now open)
+2017-05-03T11:27:02.748+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54234 #13 (2 connections now open)
+2017-05-03T11:27:02.759+0700 I -        [conn13] end connection 127.0.0.1:54234 (2 connections now open)
+2017-05-03T11:27:44.810+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54312 #14 (2 connections now open)
+2017-05-03T11:27:44.819+0700 I -        [conn14] end connection 127.0.0.1:54312 (2 connections now open)
+2017-05-03T11:29:14.354+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54462 #15 (2 connections now open)
+2017-05-03T11:29:14.361+0700 I -        [conn15] end connection 127.0.0.1:54462 (2 connections now open)
+2017-05-03T11:29:59.019+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54550 #16 (2 connections now open)
+2017-05-03T11:29:59.028+0700 I -        [conn16] end connection 127.0.0.1:54550 (2 connections now open)
+2017-05-03T11:33:22.295+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54870 #17 (2 connections now open)
+2017-05-03T11:33:22.306+0700 I -        [conn17] end connection 127.0.0.1:54870 (2 connections now open)
+2017-05-03T11:34:26.539+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54946 #18 (2 connections now open)
+2017-05-03T11:34:26.550+0700 I -        [conn18] end connection 127.0.0.1:54946 (2 connections now open)
+2017-05-03T11:35:25.735+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55180 #19 (2 connections now open)
+2017-05-03T11:35:25.741+0700 I -        [conn19] end connection 127.0.0.1:55180 (2 connections now open)
+2017-05-03T11:37:02.687+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55221 #20 (2 connections now open)
+2017-05-03T11:37:02.696+0700 I -        [conn20] end connection 127.0.0.1:55221 (2 connections now open)
+2017-05-03T11:43:59.724+0700 I -        [conn2] end connection 127.0.0.1:53449 (1 connection now open)
+2017-05-03T12:40:59.515+0700 I COMMAND  [ftdc] serverStatus was very slow: { after basic: 0, after asserts: 0, after backgroundFlushing: 0, after connections: 0, after dur: 0, after extra_info: 0, after globalLock: 0, after locks: 0, after network: 0, after opLatencies: 0, after opcounters: 0, after opcountersRepl: 0, after repl: 0, after security: 0, after storageEngine: 0, after tcmalloc: 0, after wiredTiger: 0, at end: 3397540 }
+2017-05-03T12:48:10.449+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55355 #21 (1 connection now open)
+2017-05-03T12:48:10.456+0700 I -        [conn21] end connection 127.0.0.1:55355 (1 connection now open)
+2017-05-03T12:48:38.957+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55357 #22 (1 connection now open)
+2017-05-03T12:48:38.961+0700 I -        [conn22] end connection 127.0.0.1:55357 (1 connection now open)
+2017-05-03T12:52:56.328+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55542 #23 (1 connection now open)
+2017-05-03T12:52:56.337+0700 I -        [conn23] end connection 127.0.0.1:55542 (1 connection now open)
+2017-05-03T12:53:56.015+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55548 #24 (1 connection now open)
+2017-05-03T12:53:56.016+0700 I NETWORK  [conn24] received client metadata from 127.0.0.1:55548 conn24: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.4" }, os: { type: "Windows", name: "Microsoft Windows 8", architecture: "x86_64", version: "6.2 (build 9200)" } }
+2017-05-03T12:55:20.108+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55564 #25 (2 connections now open)
+2017-05-03T12:55:20.112+0700 I -        [conn25] end connection 127.0.0.1:55564 (2 connections now open)
+2017-05-03T12:55:28.806+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55566 #26 (2 connections now open)
+2017-05-03T12:55:28.810+0700 I -        [conn26] end connection 127.0.0.1:55566 (2 connections now open)
+2017-05-03T12:55:41.934+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55567 #27 (2 connections now open)
+2017-05-03T12:55:41.937+0700 I -        [conn27] end connection 127.0.0.1:55567 (2 connections now open)
+2017-05-03T12:55:48.141+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55568 #28 (2 connections now open)
+2017-05-03T12:55:48.144+0700 I -        [conn28] end connection 127.0.0.1:55568 (2 connections now open)
+2017-05-03T12:56:29.532+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55633 #29 (2 connections now open)
+2017-05-03T12:56:29.542+0700 I -        [conn29] end connection 127.0.0.1:55633 (2 connections now open)
+2017-05-03T12:59:04.379+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55639 #30 (2 connections now open)
+2017-05-03T12:59:04.381+0700 I -        [conn30] end connection 127.0.0.1:55639 (2 connections now open)
+2017-05-03T12:59:18.576+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55640 #31 (2 connections now open)
+2017-05-03T12:59:18.577+0700 I -        [conn31] end connection 127.0.0.1:55640 (2 connections now open)
+2017-05-03T13:02:02.891+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55723 #32 (2 connections now open)
+2017-05-03T13:02:02.895+0700 I -        [conn32] end connection 127.0.0.1:55723 (2 connections now open)
+2017-05-03T13:02:31.334+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55725 #33 (2 connections now open)
+2017-05-03T13:02:31.335+0700 I -        [conn33] end connection 127.0.0.1:55725 (2 connections now open)
+2017-05-03T13:02:32.591+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55726 #34 (2 connections now open)
+2017-05-03T13:02:32.593+0700 I -        [conn34] end connection 127.0.0.1:55726 (2 connections now open)
+2017-05-03T13:02:33.329+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55727 #35 (2 connections now open)
+2017-05-03T13:02:33.331+0700 I -        [conn35] end connection 127.0.0.1:55727 (2 connections now open)
+2017-05-03T13:02:33.992+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:55728 #36 (2 connections now open)
+2017-05-03T13:02:33.993+0700 I -        [conn36] end connection 127.0.0.1:55728 (2 connections now open)
+2017-05-03T13:17:00.547+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56260 #37 (2 connections now open)
+2017-05-03T13:17:00.555+0700 I -        [conn37] end connection 127.0.0.1:56260 (2 connections now open)
+2017-05-03T13:17:35.767+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56263 #38 (2 connections now open)
+2017-05-03T13:17:35.770+0700 I -        [conn38] end connection 127.0.0.1:56263 (2 connections now open)
+2017-05-03T13:21:58.080+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56310 #39 (2 connections now open)
+2017-05-03T13:21:58.084+0700 I -        [conn39] end connection 127.0.0.1:56310 (2 connections now open)
+2017-05-03T13:23:37.072+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56342 #40 (2 connections now open)
+2017-05-03T13:23:37.076+0700 I -        [conn40] end connection 127.0.0.1:56342 (2 connections now open)
+2017-05-03T13:24:09.111+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56351 #41 (2 connections now open)
+2017-05-03T13:24:09.114+0700 I -        [conn41] end connection 127.0.0.1:56351 (2 connections now open)
+2017-05-03T13:25:03.343+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56363 #42 (2 connections now open)
+2017-05-03T13:25:03.345+0700 I -        [conn42] end connection 127.0.0.1:56363 (2 connections now open)
+2017-05-03T13:26:00.283+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56400 #43 (2 connections now open)
+2017-05-03T13:26:00.287+0700 I -        [conn43] end connection 127.0.0.1:56400 (2 connections now open)
+2017-05-03T13:34:26.451+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56552 #44 (2 connections now open)
+2017-05-03T13:34:26.461+0700 I -        [conn44] end connection 127.0.0.1:56552 (2 connections now open)
+2017-05-03T13:43:48.433+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56733 #45 (2 connections now open)
+2017-05-03T13:43:48.441+0700 I -        [conn45] end connection 127.0.0.1:56733 (2 connections now open)
+2017-05-03T13:44:00.860+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:56738 #46 (2 connections now open)
+2017-05-03T13:44:00.865+0700 I -        [conn46] end connection 127.0.0.1:56738 (2 connections now open)
+2017-05-03T13:51:35.268+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:57073 #47 (2 connections now open)
+2017-05-03T13:51:35.278+0700 I -        [conn47] end connection 127.0.0.1:57073 (2 connections now open)
+2017-05-03T14:02:53.075+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:57228 #48 (2 connections now open)
+2017-05-03T14:02:53.079+0700 I -        [conn48] end connection 127.0.0.1:57228 (2 connections now open)
+2017-05-03T14:04:35.882+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:57322 #49 (2 connections now open)
+2017-05-03T14:04:35.888+0700 I -        [conn49] end connection 127.0.0.1:57322 (2 connections now open)
+2017-05-03T14:05:17.816+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:57346 #50 (2 connections now open)
+2017-05-03T14:05:17.822+0700 I -        [conn50] end connection 127.0.0.1:57346 (2 connections now open)
+2017-05-03T14:08:49.891+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:57477 #51 (2 connections now open)
+2017-05-03T14:08:49.902+0700 I -        [conn51] end connection 127.0.0.1:57477 (2 connections now open)
+2017-05-03T14:09:49.067+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:57646 #52 (2 connections now open)
+2017-05-03T14:09:49.095+0700 I -        [conn52] end connection 127.0.0.1:57646 (2 connections now open)
+2017-05-03T14:18:48.885+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58076 #53 (2 connections now open)
+2017-05-03T14:18:48.895+0700 I -        [conn53] end connection 127.0.0.1:58076 (2 connections now open)
+2017-05-03T14:20:20.580+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58090 #54 (2 connections now open)
+2017-05-03T14:20:20.596+0700 I -        [conn54] end connection 127.0.0.1:58090 (2 connections now open)
+2017-05-03T14:21:32.141+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:58099 #55 (2 connections now open)
+2017-05-03T14:21:32.146+0700 I -        [conn55] end connection 127.0.0.1:58099 (2 connections now open)
+2017-05-03T14:25:42.606+0700 I CONTROL  [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
+2017-05-03T14:25:42.606+0700 I NETWORK  [serviceShutdown] shutdown: going to close listening sockets...
+2017-05-03T14:25:42.606+0700 I NETWORK  [serviceShutdown] closing listening socket: 496
+2017-05-03T14:25:42.606+0700 I NETWORK  [serviceShutdown] shutdown: going to flush diaglog...
+2017-05-03T14:25:42.606+0700 I FTDC     [serviceShutdown] Shutting down full-time diagnostic data capture
+2017-05-03T14:25:42.751+0700 I STORAGE  [serviceShutdown] WiredTigerKVEngine shutting down
+2017-05-03T14:25:43.090+0700 I STORAGE  [serviceShutdown] shutdown: removing fs lock...
+2017-05-03T14:25:43.091+0700 I CONTROL  [serviceShutdown] now exiting

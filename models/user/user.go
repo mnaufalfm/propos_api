@@ -3,6 +3,7 @@ package user
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -111,6 +112,7 @@ func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) st
 	}
 
 	c := sesTambah.DB("propos").C("user")
+
 	encryptPass := sha256.Sum256([]byte(pengguna.Password))
 	pengguna.Password = fmt.Sprintf("%x", encryptPass)
 
@@ -132,7 +134,7 @@ func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) st
 }
 
 func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
-	//Jika membuka profil user lain
+	//Jika membuka profil user lain dan milik sendiri
 	var user Pengguna
 	ses := s.Copy()
 	defer ses.Close()
@@ -149,9 +151,44 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 	return string(us)
 }
 
-/*func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
+func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
+	var sebelumEdit Pengguna
+	ses := s.Copy()
+	defer ses.Close()
 
-}*/
+	resBody, _ := ioutil.ReadAll(r.Body)
+	token := string(resBody)
+	tokenSplit := strings.Split(token, ".")
+	if len(tokenSplit) < 4 {
+		return ErrorReturn(w, "Format Request Salah", http.StatusBadRequest)
+	}
+	fmt.Println(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2])
+	if !jwt.CheckToken(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2]) {
+		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusBadRequest)
+	}
+	mess := jwt.Base64ToString(tokenSplit[1])
+	fmt.Println(mess)
+
+	//kk, _ := json.Marshal(mess)
+	err := json.Unmarshal([]byte(mess), &sebelumEdit)
+	if err != nil {
+		panic(err)
+	}
+
+	var bsonn map[string]interface{}
+	err = json.Unmarshal([]byte(tokenSplit[3]), &bsonn)
+	if err != nil {
+		panic(err)
+	}
+	//fmt.Println(sebelumEdit.Username)
+	//fmt.Println(bsonn)
+
+	c := s.DB("propos").C("user")
+
+	_ = c.Update(bson.M{"username": sebelumEdit.Username}, bson.M{"$set": bsonn})
+
+	return SuccessReturn(w, "Berhasil Edit Data", http.StatusOK)
+}
 
 func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 	//Digunakan untuk login ke halaman user
@@ -183,11 +220,13 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 		w.WriteHeader(http.StatusOK)
 		//fmt.Println("Tukang Hacking")
 		retBody, err := json.MarshalIndent(log, "", " ")
+		//retBody, err := json.Marshal(log)
 		if err != nil {
 			panic(err)
 		}
+		//fmt.Println(log.Id)
 		return jwt.TokenMaker(string(retBody), "anggunauranaufalwilliam")
-		fmt.Println(log.Id) //nanti di-lock pake jwt
+		//nanti di-lock pake jwt
 	}
 
 	return ErrorReturn(w, "Password Salah", http.StatusForbidden)
@@ -231,12 +270,14 @@ func UserController(urle string, w http.ResponseWriter, r *http.Request) string 
 
 	if pathe[0] == "login" {
 		return LoginUser(ses, w, r)
+	} else if pathe[0] == "registrasi" {
+		return RegistrasiUser(ses, w, r)
+	} else if pathe[0] == "edit" {
+		return EditUser(ses, w, r, pathe[1])
 	}
 
 	if len(pathe) >= 2 {
-		if pathe[1] == "registrasi" {
-			return RegistrasiUser(ses, w, r)
-		} else if pathe[1] != "" {
+		if pathe[1] != "" {
 			return GetUser(ses, w, r, pathe[1])
 		}
 	}
