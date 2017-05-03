@@ -8,7 +8,7 @@ Cara Menggunakan:
 4. Port yang digunakan adalah 9000
 
 Tim Kelompok
-1. Anggun Sulia R (@aanggunsr) ~ Ketua Projek
-2. Aura Nabila A (@azeliasalim) ~ UI/UX Engineer
-3. Lu William H (@williamhanugra) ~ Frontend Developer & Security Engineer
-4. Muhammad Naufal F M (@mnaufalfm) ~ Backend Developer & Database Engineer
+1. Anggun Sulia R (https://github.com/anggunasr) ~ Ketua Projek
+2. Aura Nabila A (https://github.com/azeliasalim) ~ UI/UX Engineer
+3. Lu William H (https://github.com/williamhanugra) ~ Frontend Developer & Security Engineer
+4. Muhammad Naufal F M (https://github.com/mnaufalfm) ~ Backend Developer & Database Engineer
