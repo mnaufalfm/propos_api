@@ -11,7 +11,7 @@ import (
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 
-	"../../authorization"
+	"../../auth"
 	"../user"
 )
 
@@ -26,15 +26,11 @@ type Komentator struct {
 	TanggalKomen string        `json:"tanggalkomen"`
 }
 
-type Content struct {
-	AlamatKonten string `json:"alamatkonten"`
-	JenisKonten  int    `json:"jeniskonten"` //1: video, 2: gambar
-	AsalKonten   int    `json:"asalkonten"`  //1: luar, 2: database
-}
-
-type Description struct {
-	Penjelasan string    `json:"penjelasan"`
-	Konten     []Content `json:"konten"`
+type PaketDonasi struct {
+	Id           int    `json:"id"`
+	NamaPaket    string `json:"namapaket"`
+	JumlahDonasi string `json"jumlahdonasi"`
+	Apresiasi    string `json:"apresiasi"`
 }
 
 type Projek struct {
@@ -42,8 +38,11 @@ type Projek struct {
 	NamaProjek        string          `json:"namaprojek"`
 	FotoProjek        []string        `json:"fotoprojek"` //simpan alamatnya saja
 	LinkYoutube       string          `json:"linkyoutube"`
+	Deadline          string          `json:"deadline"`
+	Donasi            []PaketDonasi   `json:"donasi"`
+	Tagline           []string        `json:"tagline"`
+	Kategori          []string        `json:"kategori"`
 	PenjelasanSingkat string          `json:"penjelasansingkat"`
-	LatarBelakang     Description     `json:"latarbelakang"`
 	IdPemilik         bson.ObjectId   `json:"idpemilik"`
 	IdAnggota         []bson.ObjectId `json:"idanggota"`
 	ParaDonatur       []Donatur       `json:"paradonatur"`
@@ -169,8 +168,26 @@ func EditProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request, path str
 	return SuccessReturn(w, "Berhasil Edit Projek", http.StatusOK)
 }
 
+func GetProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
+	//linknya:9000/projek/idprojek
+	var ret Projek
+	ses := s.Copy()
+	defer ses.Close()
+
+	c := ses.DB("propos").C("projek")
+
+	err := c.Find(bson.M{"_id": path}).One(&ret)
+	if err != nil {
+		return ErrorReturn(w, "Projek Tidak Ada", http.StatusBadRequest)
+	}
+
+	rett, _ := json.Marshal(ret)
+	w.WriteHeader(http.StatusOK)
+	return string(rett)
+}
+
 func GetAllProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
-	//localhost:9000/projek/
+	//linknya:9000/projek/
 	var allProjek []Projek
 	var ret []byte
 

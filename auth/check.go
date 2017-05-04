@@ -2,14 +2,13 @@ package jwt
 
 import (
 	"crypto/hmac"
-	"fmt"
 	"strings"
 )
 
 //untuk melakukan pengecekan keabsahan token
 func CheckToken(token string) bool {
 	breakToken := strings.Split(token, ".")
-	fmt.Println("MasukToken")
+	//fmt.Println("MasukToken")
 	if len(breakToken) < 2 {
 		//fmt.Println("Maksimal")
 		return false
@@ -20,7 +19,7 @@ func CheckToken(token string) bool {
 	}
 	signSend := breakToken[2]
 	signReal := ComputeHMAC256(breakToken[0]+"."+breakToken[1], "anggunauranaufalwilliam")
-	fmt.Println(signSend)
-	fmt.Println(signReal)
+	//fmt.Println(signSend)
+	//fmt.Println(signReal)
 	return hmac.Equal([]byte(signSend), []byte(signReal))
 }

@@ -3,56 +3,56 @@ package main
 import (
 	"fmt"
 
-	"net/http"
-
-	"io/ioutil"
-
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
+	"encoding/base64"
+	"encoding/hex"
 )
 
-/*type Rekening struct {
+type Rekening struct {
 	NoRekening string `json:"norekening"`
 	AtasNama   string `json:"atasnama"`
 	Bank       string `json:"bank"`
 }
 
 type Pengguna struct {
-	Username   string     `json:"username"`
-	Password   string     `json:"pass"`
-	FotoProfil string     `json:"fotoprofil"` //simpan alamatnya saja
-	Nama       string     `json:"nama"`
-	IdDiri     string     `json:"iddiri"`
-	JenisID    int        `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
-	TglLahir   string     `json:"tgllahir"`
-	Norek      []Rekening `json:"norek"`
-	Email      string     `json:"email"`
-	Gender     string     `json:"gender"`
-	NoHp       string     `json:"nohp"`
-	Alamat     string     `json:"alamat"`
-}*/
+	Id         bson.ObjectId `json:"id" bson:"_id,omitempty"`
+	Username   string        `json:"username"`
+	Password   string        `json:"pass"`
+	FotoProfil string        `json:"fotoprofil"` //simpan alamatnya saja
+	Nama       string        `json:"nama"`
+	IdDiri     string        `json:"iddiri"`
+	JenisID    int           `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string        `json:"tgllahir"`
+	Norek      []Rekening    `json:"norek"`
+	Email      string        `json:"email"`
+	Gender     string        `json:"gender"`
+	NoHp       string        `json:"nohp"`
+	Alamat     string        `json:"alamat"`
+}
 
-type Rekening struct {
-	NoRekening string `json:",omitempty"`
-	AtasNama   string `json:",omitempty"`
-	Bank       string `json:",omitempty"`
+/*type Rekening struct {
+	NoRekening string `json:"norekening,omitempty"`
+	AtasNama   string `json:"atasnama,omitempty"`
+	Bank       string `json:"bank,omitempty"`
 }
 
 type Pengguna struct {
-	Id         bson.ObjectId `json:",omitempty" bson:"_id,omitempty"`
-	Username   string        `json:",omitempty"`
-	Password   string        `json:",omitempty"`
-	FotoProfil string        `json:",omitempty"` //simpan alamatnya saja
-	Nama       string        `json:",omitempty"`
-	IdDiri     string        `json:",omitempty"`
-	JenisID    int           `json:",omitempty"` //1=KTP, 2=SIM, 3=Paspor
-	TglLahir   string        `json:",omitempty"`
-	Norek      []Rekening    `json:",omitempty"`
-	Email      string        `json:",omitempty"`
-	Gender     string        `json:",omitempty"`
-	NoHp       string        `json:",omitempty"`
-	Alamat     string        `json:",omitempty"`
-}
+	Id         bson.ObjectId `json:"id" bson:"_id,omitempty"`
+	Username   string        `json:"username,omitempty"`
+	Password   string        `json:"password,omitempty"`
+	FotoProfil string        `json:"fotoprofil,omitempty"` //simpan alamatnya saja
+	Nama       string        `json:"nama,omitempty"`
+	IdDiri     string        `json:"iddiri,omitempty"`
+	JenisID    int           `json:"jenisid,omitempty"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string        `json:"tgllahir,omitempty"`
+	Norek      []Rekening    `json:"norek,omitempty"`
+	Email      string        `json:"email,omitempty"`
+	Gender     string        `json:"gender,omitempty"`
+	NoHp       string        `json:"nohp,omitempty"`
+	Alamat     string        `json:"alamat,omitempty"`
+}*/
 
 type Biasa struct {
 	Nama  string `json:"nama"`
@@ -120,7 +120,7 @@ func main() {
 	fmt.Println(sum)*/
 
 	var user Pengguna
-	http.ListenAndServe(":9000", nil)
+	//http.ListenAndServe(":9000", nil)
 	ses, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
@@ -131,14 +131,26 @@ func main() {
 
 	c := ses.DB("propos").C("user")
 
-	err = c.Find(bson.M{"username": "williamhanug"}).One(&user)
+	err = c.Find(bson.M{"username": "willywilly"}).One(&user)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%+v", user)
-	fmt.Println()
-	if user.TglLahir == "" {
-		fmt.Println("Kosong coy")
+	//gan, erro := json.Marshal(user.Id)
+	//if erro != nil {
+	//	panic(err)
+	//}
+	//fmt.Println(string(gan))
+	a, _ := hex.DecodeString(user.Id.Hex())
+	b := base64.StdEncoding.EncodeToString(a)
+	fmt.Println(b)
+	d, _ := base64.StdEncoding.DecodeString("WQl3aW8xBav4+UsI")
+	e := string(d)
+	f := hex.EncodeToString([]byte(e))
+	fmt.Println(f)
+	//fmt.Println(jwt.TokenMaker(string([]byte(user.Id)), "anggunauranaufalwilliam"))
+	//fmt.Printf("%+v", user)
+	if user.Id.Hex() == f {
+		fmt.Println("Bacot")
 	}
 
 	//data := []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9")

@@ -32,5 +32,5 @@ func main() {
 	mux.Handle("/edit/", pengg)
 	mux.Handle("/projek/", proj)
 
-	http.ListenAndServe("localhost:9000", mux)
+	http.ListenAndServe(":9000", mux)
 }

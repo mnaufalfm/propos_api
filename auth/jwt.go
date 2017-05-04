@@ -4,7 +4,6 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
-	"fmt"
 )
 
 func StringToBase64(mes string) string {
@@ -27,8 +26,8 @@ func TokenMaker(message string, key string) string {
 }
 
 func ComputeHMAC256(mes string, key string) string {
-	fmt.Println("ComputeHMAC256")
-	fmt.Println(mes)
+	//fmt.Println("ComputeHMAC256")
+	//fmt.Println(mes)
 	kun := []byte(key)
 	pes := []byte(mes)
 	h := hmac.New(sha256.New, kun)

@@ -14,7 +14,9 @@ import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 
-	"../../authorization"
+	"encoding/hex"
+
+	"../../auth"
 )
 
 type Rekening struct {
@@ -135,15 +137,28 @@ func RegistrasiUser(ses *mgo.Session, w http.ResponseWriter, r *http.Request) st
 
 func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
 	//Jika membuka profil user lain dan milik sendiri
+	//linknya:9000/user/username
 	var user Pengguna
 	ses := s.Copy()
 	defer ses.Close()
 
 	c := ses.DB("propos").C("user")
 
-	err := c.Find(bson.M{"username": path}).One(&user)
-	if err != nil {
-		return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
+	resBody, err := ioutil.ReadAll(r.Body)
+	token := string(resBody)
+	if jwt.CheckToken(token) {
+		idaccess := strings.Split(token, ".")[1]
+		idaccesss := jwt.Base64ToString(idaccess)
+		idhex := hex.EncodeToString([]byte(idaccesss))
+		err = c.Find(bson.M{"username": path}).One(&user)
+		if err != nil {
+			return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
+		}
+		if idhex != user.Id.Hex() {
+			err = c.Find(bson.M{"username": path}).Select(bson.M{"_id": 0, "username": 1, "fotoprofil": 1, "nama": 1, "gender": 1}).One(&user)
+		}
+	} else {
+		err = c.Find(bson.M{"username": path}).Select(bson.M{"_id": 0, "username": 1, "fotoprofil": 1, "nama": 1, "gender": 1}).One(&user)
 	}
 
 	//Pengaturan return untuk mengatur pengembalian data berdasarkan siapa yang membuka dan profil siapa yang dibuka (belum dilakukan)
@@ -153,6 +168,7 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 }
 
 func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
+	//penyesuaian sedikit
 	var sebelumEdit Pengguna
 	ses := s.Copy()
 	defer ses.Close()
@@ -215,7 +231,7 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 	err = c.Find(bson.M{"username": log.Username}).One(&log)
 	if err != nil {
 		//fmt.Println("User Hilang")
-		return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
+		return ErrorReturn(w, "Anda Belum Registrasi", http.StatusBadRequest)
 	}
 
 	encryptPass := log.Password
@@ -223,13 +239,14 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 	if encryptPass == encryptPassLogin {
 		w.WriteHeader(http.StatusOK)
 		//fmt.Println("Tukang Hacking")
-		retBody, err := json.MarshalIndent(log, "", " ")
+		//retBody, err := json.MarshalIndent(log.Id, "", " ")
 		//retBody, err := json.Marshal(log)
-		if err != nil {
-			panic(err)
-		}
+		//if err != nil {
+		//	panic(err)
+		//}
+
 		//fmt.Println(log.Id)
-		return jwt.TokenMaker(string(retBody), "anggunauranaufalwilliam")
+		return jwt.TokenMaker(user.Id.Hex(), "anggunauranaufalwilliam")
 		//nanti di-lock pake jwt
 	}
 
