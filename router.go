@@ -31,6 +31,8 @@ func main() {
 	mux.Handle("/registrasi/", pengg)
 	mux.Handle("/edit/", pengg)
 	mux.Handle("/projek/", proj)
+	mux.Handle("/like/", proj)
+	mux.Handle("/comment/",proj)
 
 	http.ListenAndServe(":9000", mux)
 }

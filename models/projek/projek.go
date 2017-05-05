@@ -16,14 +16,14 @@ import (
 )
 
 type Donatur struct {
-	IdDonatur    bson.ObjectId `json:"iddonatur"`
-	JumlahDonasi string        `json:"jumlahdonasi"`
+	IdDonatur    string `json:"iddonatur"`
+	JumlahDonasi string `json:"jumlahdonasi"`
 }
 
 type Komentator struct {
-	IdKomentator bson.ObjectId `json:"idkomentator"`
-	Komen        string        `json:"komen"`
-	TanggalKomen string        `json:"tanggalkomen"`
+	IdKomentator string `json:"idkomentator"`
+	Komen        string `json:"komen"`
+	TanggalKomen string `json:"tanggalkomen"`
 }
 
 type PaketDonasi struct {
@@ -34,20 +34,20 @@ type PaketDonasi struct {
 }
 
 type Projek struct {
-	Id                bson.ObjectId   `json:"id" bson:"_id,omitempty"`
-	NamaProjek        string          `json:"namaprojek"`
-	FotoProjek        []string        `json:"fotoprojek"` //simpan alamatnya saja
-	LinkYoutube       string          `json:"linkyoutube"`
-	Deadline          string          `json:"deadline"`
-	Donasi            []PaketDonasi   `json:"donasi"`
-	Tagline           []string        `json:"tagline"`
-	Kategori          []string        `json:"kategori"`
-	PenjelasanSingkat string          `json:"penjelasansingkat"`
-	IdPemilik         bson.ObjectId   `json:"idpemilik"`
-	IdAnggota         []bson.ObjectId `json:"idanggota"`
-	ParaDonatur       []Donatur       `json:"paradonatur"`
-	ParaKomen         []Komentator    `json:"parakomen"`
-	IdLikers          []bson.ObjectId `json:"idlikers"`
+	Id                string        `json:"id" bson:"_id,omitempty"`
+	NamaProjek        string        `json:"namaprojek"`
+	FotoProjek        []string      `json:"fotoprojek"` //simpan alamatnya saja
+	LinkYoutube       string        `json:"linkyoutube"`
+	Deadline          string        `json:"deadline"`
+	Donasi            []PaketDonasi `json:"donasi"`
+	Tagline           []string      `json:"tagline"`
+	Kategori          []string      `json:"kategori"`
+	PenjelasanSingkat string        `json:"penjelasansingkat"`
+	IdPemilik         string        `json:"idpemilik"`
+	IdAnggota         []string      `json:"idanggota"`
+	ParaDonatur       []Donatur     `json:"paradonatur"`
+	ParaKomen         []Komentator  `json:"parakomen"`
+	IdLikers          []string      `json:"idlikers"`
 }
 
 func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
@@ -205,6 +205,45 @@ func GetAllProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request) string
 
 	w.WriteHeader(http.StatusOK)
 	return string(ret)
+}
+
+func LikeProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request, pathidprojek string) string {
+	//linknya:9000/like/idprojek
+	//var like []string
+	ses := s.Copy()
+	defer ses.Close()
+
+	c := ses.DB("propos").C("projek")
+
+	resBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return ErrorReturn(w, "Token Tidak Ditemukan", http.StatusBadRequest)
+	}
+	token := string(resBody)
+
+	if !jwt.CheckToken(token) {
+		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusBadRequest)
+	}
+
+	//err = c.Find(bson.M{"_id": bson.ObjectIdHex(pathidprojek)}).One(&like)
+
+	iduser := strings.Split(token, ".")[1]
+	iduserr := jwt.Base64ToString(iduser)
+	err = c.Update(bson.M{"_id": bson.IsObjectIdHex(pathidprojek)}, bson.M{"$push": bson.M{"": iduserr}})
+	if err != nil {
+		return ErrorReturn(w, "Gagal Melakukan Proses Like", http.StatusInternalServerError)
+	}
+
+	return SuccessReturn(w, "Anda Berhasil Menge-Like Projek Ini", http.StatusOK)
+}
+
+func CommentProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request, idprojek string) string {
+	//linknya:9000/comment/idprojek
+	ses := s.Copy()
+	defer ses.Close()
+
+	c := ses.DB("propos").C("projek")
+
 }
 
 //Digunakan untuk mengatur path dari Projek (/projek/...)

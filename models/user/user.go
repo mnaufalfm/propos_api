@@ -26,19 +26,19 @@ type Rekening struct {
 }
 
 type Pengguna struct {
-	Id         bson.ObjectId `json:"id" bson:"_id,omitempty"`
-	Username   string        `json:"username"`
-	Password   string        `json:"password"`
-	FotoProfil string        `json:"fotoprofil"` //simpan alamatnya saja
-	Nama       string        `json:"nama"`
-	IdDiri     string        `json:"iddiri"`
-	JenisID    int           `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
-	TglLahir   string        `json:"tgllahir"`
-	Norek      []Rekening    `json:"norek"`
-	Email      string        `json:"email"`
-	Gender     string        `json:"gender"`
-	NoHp       string        `json:"nohp"`
-	Alamat     string        `json:"alamat"`
+	Id         string     `json:"id" bson:"_id,omitempty"`
+	Username   string     `json:"username"`
+	Password   string     `json:"password"`
+	FotoProfil string     `json:"fotoprofil"` //simpan alamatnya saja
+	Nama       string     `json:"nama"`
+	IdDiri     string     `json:"iddiri"`
+	JenisID    int        `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string     `json:"tgllahir"`
+	Norek      []Rekening `json:"norek"`
+	Email      string     `json:"email"`
+	Gender     string     `json:"gender"`
+	NoHp       string     `json:"nohp"`
+	Alamat     string     `json:"alamat"`
 }
 
 func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
@@ -154,7 +154,7 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 		if err != nil {
 			return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
 		}
-		if idhex != user.Id.Hex() {
+		if idhex != user.Id {
 			err = c.Find(bson.M{"username": path}).Select(bson.M{"_id": 0, "username": 1, "fotoprofil": 1, "nama": 1, "gender": 1}).One(&user)
 		}
 	} else {
@@ -169,7 +169,6 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 
 func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string) string {
 	//penyesuaian sedikit
-	var sebelumEdit Pengguna
 	ses := s.Copy()
 	defer ses.Close()
 
@@ -184,25 +183,26 @@ func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path strin
 		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusForbidden)
 	}
 	mess := jwt.Base64ToString(tokenSplit[1])
+	messhex := hex.EncodeToString([]byte(mess))
 	//fmt.Println(mess)
 
 	//kk, _ := json.Marshal(mess)
-	err := json.Unmarshal([]byte(mess), &sebelumEdit)
-	if err != nil {
-		panic(err)
-	}
+	//err := json.Unmarshal([]byte(mess), &sebelumEdit)
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	var bsonn map[string]interface{}
-	err = json.Unmarshal([]byte(tokenSplit[3]), &bsonn)
+	err := json.Unmarshal([]byte(tokenSplit[3]), &bsonn)
 	if err != nil {
-		panic(err)
+		return ErrorReturn(w, "Tidak Ada Edit Request", http.StatusBadRequest)
 	}
 	//fmt.Println(sebelumEdit.Username)
 	//fmt.Println(bsonn)
 
 	c := s.DB("propos").C("user")
 
-	err = c.Update(bson.M{"username": sebelumEdit.Username}, bson.M{"$set": bsonn})
+	err = c.Update(bson.M{"_id": bson.ObjectIdHex(messhex)}, bson.M{"$set": bsonn})
 	if err != nil {
 		return ErrorReturn(w, "Gagal Edit Data", http.StatusBadRequest)
 	}
@@ -246,7 +246,7 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 		//}
 
 		//fmt.Println(log.Id)
-		return jwt.TokenMaker(user.Id.Hex(), "anggunauranaufalwilliam")
+		return jwt.TokenMaker(log.Id, "anggunauranaufalwilliam")
 		//nanti di-lock pake jwt
 	}
 

@@ -8,6 +8,7 @@ import (
 
 	"encoding/base64"
 	"encoding/hex"
+	"reflect"
 )
 
 type Rekening struct {
@@ -17,19 +18,19 @@ type Rekening struct {
 }
 
 type Pengguna struct {
-	Id         bson.ObjectId `json:"id" bson:"_id,omitempty"`
-	Username   string        `json:"username"`
-	Password   string        `json:"pass"`
-	FotoProfil string        `json:"fotoprofil"` //simpan alamatnya saja
-	Nama       string        `json:"nama"`
-	IdDiri     string        `json:"iddiri"`
-	JenisID    int           `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
-	TglLahir   string        `json:"tgllahir"`
-	Norek      []Rekening    `json:"norek"`
-	Email      string        `json:"email"`
-	Gender     string        `json:"gender"`
-	NoHp       string        `json:"nohp"`
-	Alamat     string        `json:"alamat"`
+	Id         string     `json:"id" bson:"_id,omitempty"`
+	Username   string     `json:"username"`
+	Password   string     `json:"pass"`
+	FotoProfil string     `json:"fotoprofil"` //simpan alamatnya saja
+	Nama       string     `json:"nama"`
+	IdDiri     string     `json:"iddiri"`
+	JenisID    int        `json:"jenisid"` //1=KTP, 2=SIM, 3=Paspor
+	TglLahir   string     `json:"tgllahir"`
+	Norek      []Rekening `json:"norek"`
+	Email      string     `json:"email"`
+	Gender     string     `json:"gender"`
+	NoHp       string     `json:"nohp"`
+	Alamat     string     `json:"alamat"`
 }
 
 /*type Rekening struct {
@@ -140,8 +141,8 @@ func main() {
 	//	panic(err)
 	//}
 	//fmt.Println(string(gan))
-	a, _ := hex.DecodeString(user.Id.Hex())
-	b := base64.StdEncoding.EncodeToString(a)
+	//a, _ := hex.DecodeString(user.Id.Hex())
+	/*b := base64.StdEncoding.EncodeToString([]byte(user.Id))
 	fmt.Println(b)
 	d, _ := base64.StdEncoding.DecodeString("WQl3aW8xBav4+UsI")
 	e := string(d)
@@ -149,9 +150,12 @@ func main() {
 	fmt.Println(f)
 	//fmt.Println(jwt.TokenMaker(string([]byte(user.Id)), "anggunauranaufalwilliam"))
 	//fmt.Printf("%+v", user)
-	if user.Id.Hex() == f {
-		fmt.Println("Bacot")
-	}
+	//if user.Id.Hex() == f {
+	//		fmt.Println("Bacot")
+	//	}
+
+	fmt.Printf("%s %s", reflect.TypeOf(user.Id), hex.EncodeToString([]byte(user.Id)))*/
+	//	fmt.Println(reflect.TypeOf(user.Id.Hex()))
 
 	//data := []byte("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9")
 	//a := make([]byte, base64.RawStdEncoding.EncodedLen(len(data)))
@@ -171,4 +175,10 @@ func main() {
 	//fmt.Println(fmt.Sprintf("%x", sha256.Sum256([]byte(pass))))
 
 	//fmt.Println(string("184054b78da172c42e37015fb66dd6968b582846f4226c9edfad9da80dc2bf22"))
+	//s := append([]string{"1", "2"}, []string{"3", "4"}...)
+	//fmt.Println(s)
+
+	//var bsonn map[string]interface{}
+	//err = json.Unmarshal([]byte(s), &bsonn)
+	//fmt.Println(bsonn)
 }
