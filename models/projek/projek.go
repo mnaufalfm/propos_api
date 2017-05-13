@@ -229,7 +229,7 @@ func LikeProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request, pathidpr
 
 	iduser := strings.Split(token, ".")[1]
 	iduserr := jwt.Base64ToString(iduser)
-	err = c.Update(bson.M{"_id": bson.IsObjectIdHex(pathidprojek)}, bson.M{"$push": bson.M{"": iduserr}})
+	err = c.Update(bson.M{"_id": bson.IsObjectIdHex(pathidprojek)}, bson.M{"$push": bson.M{"idlikers": iduserr}})
 	if err != nil {
 		return ErrorReturn(w, "Gagal Melakukan Proses Like", http.StatusInternalServerError)
 	}
@@ -244,6 +244,14 @@ func CommentProjek(s *mgo.Session, w http.ResponseWriter, r *http.Request, idpro
 
 	c := ses.DB("propos").C("projek")
 
+	resBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return ErrorReturn(w, "Tidak Ada Request", http.StatusBadRequest)
+	}
+	token := string(resBody)
+	if !jwt.CheckToken(token) {
+		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusBadRequest)
+	}
 }
 
 //Digunakan untuk mengatur path dari Projek (/projek/...)

@@ -1,17 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+
+	"net/http"
 
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-
-	"encoding/base64"
-	"encoding/hex"
-	"reflect"
 )
 
-type Rekening struct {
+/*type Rekening struct {
 	NoRekening string `json:"norekening"`
 	AtasNama   string `json:"atasnama"`
 	Bank       string `json:"bank"`
@@ -31,9 +30,9 @@ type Pengguna struct {
 	Gender     string     `json:"gender"`
 	NoHp       string     `json:"nohp"`
 	Alamat     string     `json:"alamat"`
-}
+}*/
 
-/*type Rekening struct {
+type Rekening struct {
 	NoRekening string `json:"norekening,omitempty"`
 	AtasNama   string `json:"atasnama,omitempty"`
 	Bank       string `json:"bank,omitempty"`
@@ -44,7 +43,7 @@ type Pengguna struct {
 	Username   string        `json:"username,omitempty"`
 	Password   string        `json:"password,omitempty"`
 	FotoProfil string        `json:"fotoprofil,omitempty"` //simpan alamatnya saja
-	Nama       string        `json:"nama,omitempty"`
+	Nama       string        `json:"nama,omitempty" bson:"nama,omitempty"`
 	IdDiri     string        `json:"iddiri,omitempty"`
 	JenisID    int           `json:"jenisid,omitempty"` //1=KTP, 2=SIM, 3=Paspor
 	TglLahir   string        `json:"tgllahir,omitempty"`
@@ -53,9 +52,9 @@ type Pengguna struct {
 	Gender     string        `json:"gender,omitempty"`
 	NoHp       string        `json:"nohp,omitempty"`
 	Alamat     string        `json:"alamat,omitempty"`
-}*/
+}
 
-type Biasa struct {
+/*type Biasa struct {
 	Nama  string `json:"nama"`
 	Kelas string `json:"kelas"`
 }
@@ -64,6 +63,45 @@ type Berisik struct {
 	Maklumi int     `json:"maklumi"`
 	Haha    string  `json:"haha"`
 	Hihi    []Biasa `json:"hihi"`
+}*/
+
+func ganteng(w http.ResponseWriter, r *http.Request, s *mgo.Session) []byte {
+	ses := s.Copy()
+	defer ses.Close()
+
+	var log Pengguna
+
+	c := ses.DB("coba").C("cobaa")
+
+	err := json.NewDecoder(r.Body).Decode(&log)
+	if err != nil {
+		//fmt.Println("Cari data")
+		fmt.Println("Error coy")
+	}
+	c.Insert(log)
+
+	if log.Alamat == "" {
+		fmt.Println("Kosong coy")
+	}
+
+	a, _ := json.Marshal(log)
+
+	return a
+}
+
+type UserHandler int
+
+func (u UserHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	/*ses, err := mgo.Dial("localhost:27017")
+	if err != nil {
+		panic(err)
+	}
+
+	defer ses.Close()
+	ses.SetMode(mgo.Monotonic, true)
+
+	//io.WriteString(res, ganteng(res, req, ses))*/
+	res.Write([]byte(`{"code":400, "error":"Hahaha iseng aja"}`))
 }
 
 func main() {
@@ -119,10 +157,12 @@ func main() {
 	/*var sum string
 	sum = fmt.Sprintf("%x", sha256.Sum256([]byte("hello world\n")))
 	fmt.Println(sum)*/
-
-	var user Pengguna
-	//http.ListenAndServe(":9000", nil)
-	ses, err := mgo.Dial("localhost:27017")
+	a:=5
+	b:="bodo amat"
+	fmt.Printf("hai: %d \"%s\"", a, b)
+	var uu UserHandler
+	http.ListenAndServe(":9000", uu)
+	/*ses, err := mgo.Dial("localhost:27017")
 	if err != nil {
 		panic(err)
 	}
@@ -135,7 +175,8 @@ func main() {
 	err = c.Find(bson.M{"username": "willywilly"}).One(&user)
 	if err != nil {
 		panic(err)
-	}
+	}*/
+
 	//gan, erro := json.Marshal(user.Id)
 	//if erro != nil {
 	//	panic(err)

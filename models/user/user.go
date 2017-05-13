@@ -9,8 +9,6 @@ import (
 
 	"crypto/sha256"
 
-	"strconv"
-
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 
@@ -44,7 +42,8 @@ type Pengguna struct {
 func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
 	w.WriteHeader(code)
 	//fmt.Fprintf(w, "{error: %i, message: %q}", code, pesan)
-	return "{error: " + strconv.Itoa(code) + ", message: " + pesan + "}"
+	//return "{error: " + strconv.Itoa(code) + ", message: " + pesan + "}"
+	return fmt.Sprintf("{\"error\": %d \"message\": \"%s\"}", code, pesan)
 }
 
 /*func SuccessReturn(w http.ResponseWriter, json []byte, pesan string, code int) string {
@@ -55,7 +54,8 @@ func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
 
 func SuccessReturn(w http.ResponseWriter, pesan string, code int) string {
 	w.WriteHeader(code)
-	return "{success: " + strconv.Itoa(code) + ", message: " + pesan + "}"
+	//return `{"success": " + strconv.Itoa(code) + ", message: " + pesan + "}`
+	return fmt.Sprintf("{\"success\": %d \"message\": \"%s\"}", code, pesan)
 }
 
 func CheckDupUser(s *mgo.Session, p Pengguna) string {
@@ -246,7 +246,7 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 		//}
 
 		//fmt.Println(log.Id)
-		return jwt.TokenMaker(log.Id, "anggunauranaufalwilliam")
+		return fmt.Sprintf("{\"token\": \"%s\" \"access\": \"%s\"}", jwt.TokenMaker(log.Id, "anggunauranaufalwilliam"), jwt.StringToBase64(log.Username))
 		//nanti di-lock pake jwt
 	}
 
