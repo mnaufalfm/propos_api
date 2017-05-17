@@ -43,7 +43,7 @@ func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
 	w.WriteHeader(code)
 	//fmt.Fprintf(w, "{error: %i, message: %q}", code, pesan)
 	//return "{error: " + strconv.Itoa(code) + ", message: " + pesan + "}"
-	return fmt.Sprintf("{\"error\": %d \"message\": \"%s\"}", code, pesan)
+	return fmt.Sprintf("{\"error\": %d, \"message\": \"%s\"}", code, pesan)
 }
 
 /*func SuccessReturn(w http.ResponseWriter, json []byte, pesan string, code int) string {
@@ -55,7 +55,7 @@ func ErrorReturn(w http.ResponseWriter, pesan string, code int) string {
 func SuccessReturn(w http.ResponseWriter, pesan string, code int) string {
 	w.WriteHeader(code)
 	//return `{"success": " + strconv.Itoa(code) + ", message: " + pesan + "}`
-	return fmt.Sprintf("{\"success\": %d \"message\": \"%s\"}", code, pesan)
+	return fmt.Sprintf("{\"success\": %d, \"message\": \"%s\"}", code, pesan)
 }
 
 func CheckDupUser(s *mgo.Session, p Pengguna) string {
@@ -144,13 +144,14 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 
 	c := ses.DB("propos").C("user")
 
-	resBody, err := ioutil.ReadAll(r.Body)
-	token := string(resBody)
+	//resBody, err := ioutil.ReadAll(r.Body)
+	//token := string(resBody)
+	token := r.Header.Get("Auth")
 	if jwt.CheckToken(token) {
 		idaccess := strings.Split(token, ".")[1]
 		idaccesss := jwt.Base64ToString(idaccess)
 		idhex := hex.EncodeToString([]byte(idaccesss))
-		err = c.Find(bson.M{"username": path}).One(&user)
+		err := c.Find(bson.M{"username": path}).One(&user)
 		if err != nil {
 			return ErrorReturn(w, "User Tidak Ditemukan", http.StatusBadRequest)
 		}
@@ -158,7 +159,7 @@ func GetUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path string
 			err = c.Find(bson.M{"username": path}).Select(bson.M{"_id": 0, "username": 1, "fotoprofil": 1, "nama": 1, "gender": 1}).One(&user)
 		}
 	} else {
-		err = c.Find(bson.M{"username": path}).Select(bson.M{"_id": 0, "username": 1, "fotoprofil": 1, "nama": 1, "gender": 1}).One(&user)
+		_ = c.Find(bson.M{"username": path}).Select(bson.M{"_id": 0, "username": 1, "fotoprofil": 1, "nama": 1, "gender": 1}).One(&user)
 	}
 
 	//Pengaturan return untuk mengatur pengembalian data berdasarkan siapa yang membuka dan profil siapa yang dibuka (belum dilakukan)
@@ -172,14 +173,15 @@ func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path strin
 	ses := s.Copy()
 	defer ses.Close()
 
-	resBody, _ := ioutil.ReadAll(r.Body)
-	token := string(resBody)
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	req := string(reqBody)
+	token := r.Header.Get("Auth")
 	tokenSplit := strings.Split(token, ".")
-	if len(tokenSplit) < 4 {
+	if req == "" {
 		return ErrorReturn(w, "Format Request Salah", http.StatusBadRequest)
 	}
-	fmt.Println(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2])
-	if !jwt.CheckToken(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2]) {
+	//fmt.Println(tokenSplit[0] + "." + tokenSplit[1] + "." + tokenSplit[2])
+	if !jwt.CheckToken(token) {
 		return ErrorReturn(w, "Token yang Dikirimkan Invalid", http.StatusForbidden)
 	}
 	mess := jwt.Base64ToString(tokenSplit[1])
@@ -193,7 +195,7 @@ func EditUser(s *mgo.Session, w http.ResponseWriter, r *http.Request, path strin
 	//}
 
 	var bsonn map[string]interface{}
-	err := json.Unmarshal([]byte(tokenSplit[3]), &bsonn)
+	err := json.Unmarshal([]byte(req), &bsonn)
 	if err != nil {
 		return ErrorReturn(w, "Tidak Ada Edit Request", http.StatusBadRequest)
 	}
@@ -246,7 +248,7 @@ func LoginUser(s *mgo.Session, w http.ResponseWriter, r *http.Request) string {
 		//}
 
 		//fmt.Println(log.Id)
-		return fmt.Sprintf("{\"token\": \"%s\" \"access\": \"%s\"}", jwt.TokenMaker(log.Id, "anggunauranaufalwilliam"), jwt.StringToBase64(log.Username))
+		return fmt.Sprintf("{\"token\": \"%s\", \"access\": \"%s\"}", jwt.TokenMaker(log.Id, "anggunauranaufalwilliam"), jwt.StringToBase64(log.Username))
 		//nanti di-lock pake jwt
 	}
 

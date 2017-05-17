@@ -1,0 +1,2 @@
+1. BSON omitempty --> Edit user, get user berubah
+2. Abaikan kosong dipengecekan (CheckDupUser) --> hati-hati dengan string kosong

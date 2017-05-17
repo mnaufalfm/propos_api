@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-//untuk melakukan pengecekan keabsahan token
+//untuk melakukan pengecekan keabsahan token. Return true jika token valid
 func CheckToken(token string) bool {
 	breakToken := strings.Split(token, ".")
 	//fmt.Println("MasukToken")

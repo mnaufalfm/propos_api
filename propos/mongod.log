@@ -1,30 +1,50 @@
-2017-05-13T12:10:24.272+0700 I CONTROL  [main] Trying to start Windows service 'MongoDB'
-2017-05-13T12:10:24.274+0700 I CONTROL  [initandlisten] MongoDB starting : pid=2220 port=27017 dbpath=D:\Project\Go\propos_api\propos 64-bit host=Laper
-2017-05-13T12:10:24.274+0700 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
-2017-05-13T12:10:24.275+0700 I CONTROL  [initandlisten] db version v3.4.4
-2017-05-13T12:10:24.275+0700 I CONTROL  [initandlisten] git version: 888390515874a9debd1b6c5d36559ca86b44babd
-2017-05-13T12:10:24.275+0700 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
-2017-05-13T12:10:24.275+0700 I CONTROL  [initandlisten] allocator: tcmalloc
-2017-05-13T12:10:24.275+0700 I CONTROL  [initandlisten] modules: none
-2017-05-13T12:10:24.276+0700 I CONTROL  [initandlisten] build environment:
-2017-05-13T12:10:24.276+0700 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
-2017-05-13T12:10:24.276+0700 I CONTROL  [initandlisten]     distarch: x86_64
-2017-05-13T12:10:24.276+0700 I CONTROL  [initandlisten]     target_arch: x86_64
-2017-05-13T12:10:24.276+0700 I CONTROL  [initandlisten] options: { config: "C:\MongoDB\Server\3.4\bin\mongod.cfg", service: true, storage: { dbPath: "D:\Project\Go\propos_api\propos" }, systemLog: { destination: "file", path: "D:\Project\Go\propos_api\propos\mongod.log" } }
-2017-05-13T12:10:24.338+0700 I -        [initandlisten] Detected data files in D:\Project\Go\propos_api\propos created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
-2017-05-13T12:10:24.338+0700 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3515M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
-2017-05-13T12:10:32.697+0700 I CONTROL  [initandlisten] 
-2017-05-13T12:10:32.697+0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
-2017-05-13T12:10:32.698+0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
-2017-05-13T12:10:32.698+0700 I CONTROL  [initandlisten] 
-2017-05-13T12:10:45.567+0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'D:/Project/Go/propos_api/propos/diagnostic.data'
-2017-05-13T12:10:45.568+0700 I STORAGE  [initandlisten] Service running
-2017-05-13T12:10:45.582+0700 I NETWORK  [thread1] waiting for connections on port 27017
-2017-05-13T22:13:22.430+0700 I CONTROL  [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
-2017-05-13T22:13:22.450+0700 I NETWORK  [serviceShutdown] shutdown: going to close listening sockets...
-2017-05-13T22:13:22.450+0700 I NETWORK  [serviceShutdown] closing listening socket: 516
-2017-05-13T22:13:22.466+0700 I NETWORK  [serviceShutdown] shutdown: going to flush diaglog...
-2017-05-13T22:13:22.472+0700 I FTDC     [serviceShutdown] Shutting down full-time diagnostic data capture
-2017-05-13T22:13:22.521+0700 I STORAGE  [serviceShutdown] WiredTigerKVEngine shutting down
-2017-05-13T22:13:22.918+0700 I STORAGE  [serviceShutdown] shutdown: removing fs lock...
-2017-05-13T22:13:22.918+0700 I CONTROL  [serviceShutdown] now exiting
+2017-05-16T19:30:24.715+0700 I CONTROL  [main] Trying to start Windows service 'MongoDB'
+2017-05-16T19:30:24.716+0700 I CONTROL  [initandlisten] MongoDB starting : pid=7036 port=27017 dbpath=D:\Project\Go\propos_api\propos 64-bit host=Laper
+2017-05-16T19:30:24.717+0700 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-05-16T19:30:24.717+0700 I CONTROL  [initandlisten] db version v3.4.4
+2017-05-16T19:30:24.717+0700 I CONTROL  [initandlisten] git version: 888390515874a9debd1b6c5d36559ca86b44babd
+2017-05-16T19:30:24.718+0700 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-05-16T19:30:24.718+0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-05-16T19:30:24.718+0700 I CONTROL  [initandlisten] modules: none
+2017-05-16T19:30:24.720+0700 I CONTROL  [initandlisten] build environment:
+2017-05-16T19:30:24.721+0700 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-05-16T19:30:24.721+0700 I CONTROL  [initandlisten]     distarch: x86_64
+2017-05-16T19:30:24.721+0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-05-16T19:30:24.721+0700 I CONTROL  [initandlisten] options: { config: "C:\MongoDB\Server\3.4\bin\mongod.cfg", service: true, storage: { dbPath: "D:\Project\Go\propos_api\propos" }, systemLog: { destination: "file", path: "D:\Project\Go\propos_api\propos\mongod.log" } }
+2017-05-16T19:30:24.723+0700 I -        [initandlisten] Detected data files in D:\Project\Go\propos_api\propos created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-05-16T19:30:24.723+0700 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3515M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-05-16T19:30:25.746+0700 I CONTROL  [initandlisten] 
+2017-05-16T19:30:25.747+0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-05-16T19:30:25.747+0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-05-16T19:30:25.747+0700 I CONTROL  [initandlisten] 
+2017-05-16T19:30:26.928+0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'D:/Project/Go/propos_api/propos/diagnostic.data'
+2017-05-16T19:30:26.931+0700 I STORAGE  [initandlisten] Service running
+2017-05-16T19:30:26.931+0700 I NETWORK  [thread1] waiting for connections on port 27017
+2017-05-16T19:30:47.219+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:54511 #1 (1 connection now open)
+2017-05-16T19:30:47.287+0700 I NETWORK  [conn1] received client metadata from 127.0.0.1:54511 conn1: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.4" }, os: { type: "Windows", name: "Microsoft Windows 8", architecture: "x86_64", version: "6.2 (build 9200)" } }
+2017-05-16T19:30:57.095+0700 I COMMAND  [conn1] command propos.user appName: "MongoDB Shell" command: find { find: "user", filter: {} } planSummary: COLLSCAN keysExamined:0 docsExamined:1 cursorExhausted:1 numYields:1 nreturned:1 reslen:701 locks:{ Global: { acquireCount: { r: 4 } }, Database: { acquireCount: { r: 2 } }, Collection: { acquireCount: { r: 2 } } } protocol:op_command 152ms
+2017-05-16T19:33:11.049+0700 I COMMAND  [conn1] command propos.user appName: "MongoDB Shell" command: insert { insert: "user", documents: [ { _id: ObjectId('591af186dd5a6a5d47a3a62f'), username: "haha", password: "laayastawi" } ], ordered: true } ninserted:1 keysInserted:1 numYields:0 reslen:29 locks:{ Global: { acquireCount: { r: 1, w: 1 } }, Database: { acquireCount: { w: 1 } }, Collection: { acquireCount: { w: 1 } } } protocol:op_command 107ms
+2017-05-16T19:35:19.141+0700 I WRITE    [conn1] update propos.user appName: "MongoDB Shell" query: { username: "haha" } planSummary: COLLSCAN update: { $set: { nama: "Aura Azelia" } } keysExamined:0 docsExamined:2 nMatched:1 nModified:1 numYields:2 locks:{ Global: { acquireCount: { r: 3, w: 3 } }, Database: { acquireCount: { w: 3 } }, Collection: { acquireCount: { w: 3 } } } 225ms
+2017-05-16T19:35:19.142+0700 I COMMAND  [conn1] command propos.$cmd appName: "MongoDB Shell" command: update { update: "user", updates: [ { q: { username: "haha" }, u: { $set: { nama: "Aura Azelia" } }, multi: false, upsert: false } ], ordered: true } numYields:0 reslen:44 locks:{ Global: { acquireCount: { r: 3, w: 3 } }, Database: { acquireCount: { w: 3 } }, Collection: { acquireCount: { w: 3 } } } protocol:op_command 226ms
+2017-05-16T19:41:54.572+0700 I COMMAND  [conn1] command admin.$cmd appName: "MongoDB Shell" command: listDatabases { listDatabases: 1.0 } numYields:0 reslen:265 locks:{ Global: { acquireCount: { r: 10 } }, Database: { acquireCount: { r: 4 } } } protocol:op_command 141ms
+2017-05-17T07:29:06.306+0700 I -        [conn1] end connection 127.0.0.1:54511 (1 connection now open)
+2017-05-17T18:26:36.037+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60428 #2 (1 connection now open)
+2017-05-17T18:26:36.095+0700 I -        [conn2] end connection 127.0.0.1:60428 (1 connection now open)
+2017-05-17T18:26:43.044+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60429 #3 (1 connection now open)
+2017-05-17T18:26:43.046+0700 I -        [conn3] end connection 127.0.0.1:60429 (1 connection now open)
+2017-05-17T18:26:52.134+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60431 #4 (1 connection now open)
+2017-05-17T18:26:52.137+0700 I -        [conn4] end connection 127.0.0.1:60431 (1 connection now open)
+2017-05-17T18:27:02.730+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60433 #5 (1 connection now open)
+2017-05-17T18:27:02.733+0700 I -        [conn5] end connection 127.0.0.1:60433 (1 connection now open)
+2017-05-17T18:27:10.806+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60435 #6 (1 connection now open)
+2017-05-17T18:27:10.808+0700 I -        [conn6] end connection 127.0.0.1:60435 (1 connection now open)
+2017-05-17T18:27:17.282+0700 I NETWORK  [thread1] connection accepted from 127.0.0.1:60438 #7 (1 connection now open)
+2017-05-17T18:27:17.284+0700 I -        [conn7] end connection 127.0.0.1:60438 (1 connection now open)
+2017-05-17T18:31:38.476+0700 I CONTROL  [serviceShutdown] got SERVICE_CONTROL_STOP request from Windows Service Control Manager, will terminate after current cmd ends
+2017-05-17T18:31:38.477+0700 I NETWORK  [serviceShutdown] shutdown: going to close listening sockets...
+2017-05-17T18:31:38.477+0700 I NETWORK  [serviceShutdown] closing listening socket: 496
+2017-05-17T18:31:38.477+0700 I NETWORK  [serviceShutdown] shutdown: going to flush diaglog...
+2017-05-17T18:31:38.477+0700 I FTDC     [serviceShutdown] Shutting down full-time diagnostic data capture
+2017-05-17T18:31:38.554+0700 I STORAGE  [serviceShutdown] WiredTigerKVEngine shutting down
+2017-05-17T18:31:39.138+0700 I STORAGE  [serviceShutdown] shutdown: removing fs lock...
+2017-05-17T18:31:39.138+0700 I CONTROL  [serviceShutdown] now exiting

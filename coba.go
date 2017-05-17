@@ -101,6 +101,7 @@ func (u UserHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	ses.SetMode(mgo.Monotonic, true)
 
 	//io.WriteString(res, ganteng(res, req, ses))*/
+	fmt.Println(req.Header.Get("Auth"))
 	res.Write([]byte(`{"code":400, "error":"Hahaha iseng aja"}`))
 }
 
@@ -157,8 +158,8 @@ func main() {
 	/*var sum string
 	sum = fmt.Sprintf("%x", sha256.Sum256([]byte("hello world\n")))
 	fmt.Println(sum)*/
-	a:=5
-	b:="bodo amat"
+	a := 5
+	b := "bodo amat"
 	fmt.Printf("hai: %d \"%s\"", a, b)
 	var uu UserHandler
 	http.ListenAndServe(":9000", uu)
